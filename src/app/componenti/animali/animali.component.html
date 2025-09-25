@@ -2,15 +2,18 @@
   <!-- Header -->
   <div class="d-flex justify-content-between align-items-center my-3">
     <h1 class="text-center">I tuoi animali</h1>
-    <a class="btn btn-primary btn-sm" href="#" role="button">
+    <button class="btn btn-primary btn-sm" (click)="aggiungiAnimale()">
       Aggiungi animale
-    </a>
+    </button>
   </div>
 
   <!-- Lista animali -->
-  <div class="row">
-    <div class="col-12" *ngFor="let animale of animali">
-      <div class="card mb-3 shadow-sm p-3 d-flex flex-row align-items-center">
+  <div class="row" *ngFor="let animale of animali">
+    <div class="col-12 mb-3">
+      <mat-card
+        appearance="outlined"
+        class="p-3 d-flex flex-row align-items-center"
+      >
         <!-- Icona -->
         <div class="me-3 fs-3 text-primary">
           <i
@@ -37,12 +40,12 @@
         </div>
 
         <!-- Azioni -->
-        <div class="ms-3 text-nowrap">
+        <div class="ms-3 text-nowrap d-flex flex-column gap-1">
           <button
-            type="button"
             class="btn btn-warning btn-sm"
             data-bs-toggle="modal"
-            [attr.data-bs-target]="'#updateModal'"
+            [attr.data-bs-target]="'#updateModal' + animale.id"
+            (click)="openUpdateModal(animale)"
           >
             Modifica
           </button>
@@ -54,10 +57,10 @@
             Elimina
           </button>
         </div>
-      </div>
+      </mat-card>
 
       <!-- Modal Modifica -->
-      <div class="modal fade" [id]="'updateModal'" tabindex="-1">
+      <div class="modal fade" [id]="'updateModal' + animale.id" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -68,6 +71,7 @@
                 data-bs-dismiss="modal"
               ></button>
             </div>
+
             <form [formGroup]="updateForm" (ngSubmit)="OnUpdate()">
               <div class="modal-body">
                 <input type="hidden" formControlName="utente" />
@@ -84,7 +88,11 @@
                 <div class="mb-3">
                   <label class="form-label">Tipo</label>
                   <select formControlName="tipo" class="form-select">
-                    <option *ngFor="let t of tipi" [ngValue]="t">
+                    <option
+                      *ngFor="let t of tipi"
+                      [value]="t"
+                      [selected]="t === animale.tipo"
+                    >
                       {{ t }}
                     </option>
                   </select>
@@ -112,7 +120,13 @@
                 <button class="btn btn-secondary" data-bs-dismiss="modal">
                   Chiudi
                 </button>
-                <button class="btn btn-primary" type="submit">Salva</button>
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  [disabled]="!updateForm.valid"
+                >
+                  Salva
+                </button>
               </div>
             </form>
           </div>

@@ -15,8 +15,9 @@ export class AnimaliComponent implements OnInit {
   isLogged: boolean = false;
   animali: any;
   msg: any;
-  tipi: string[] = ['Cane', 'Gatto', 'Uccello', 'Pesce', 'Roditore', 'Rettile'];
-  selectedAnimale: any;
+  tipi: string[] = ['cane', 'gatto', 'uccello', 'pesce', 'roditore', 'rettile'];
+  selectedAnimale: any = null;
+
   constructor(
     private route: ActivatedRoute,
     private service: AnimaliService,
@@ -43,6 +44,7 @@ export class AnimaliComponent implements OnInit {
         });
       }
     });
+
     this.isLogged = this.auth.isAutentificated();
   }
 
@@ -73,4 +75,15 @@ export class AnimaliComponent implements OnInit {
   elimina(animale: any) {
     console.log('Eliminato:', animale);
   }
+
+  openUpdateModal(animale: any) {
+    this.selectedAnimale = animale;
+    this.updateForm.patchValue(animale);
+  }
+
+  annullaUpdate() {
+    this.selectedAnimale = null;
+    this.updateForm.reset();
+  }
+  aggiungiAnimale() {}
 }
