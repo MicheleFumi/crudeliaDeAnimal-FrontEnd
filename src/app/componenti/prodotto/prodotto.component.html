@@ -6,7 +6,7 @@
         <img
           mat-card-image
           [src]="prodotto?.immagineUrl"
-          alt="{{ prodotto.nomeProdotto }}"
+          alt="{{ prodotto?.nomeProdotto }}"
           class="img-fluid"
         />
       </mat-card>
@@ -28,11 +28,22 @@
         <p>
           Disponibili: <strong>{{ prodotto?.quantitaDisponibile }}</strong>
         </p>
+        
+       
+        <div class="qty-box mt-3">
+          <div class="d-flex align-items-center gap-2">
 
+            <input matInput type="number"
+                  [(ngModel)]="quantita"
+                  min="1"
+                  class="qty-input" />
+          </div>
+        </div>
         <mat-card-actions class="mt-4">
-          <button *ngIf="isLogged" mat-raised-button color="primary">
+          <button *ngIf="isLogged" mat-raised-button color="primary" (click)="aggiungiAlCarrello()">
             Aggiungi al carrello
           </button>
+
           <a
             href="/auth/signin"
             *ngIf="!isLogged"

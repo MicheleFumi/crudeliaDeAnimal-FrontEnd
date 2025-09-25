@@ -37,6 +37,7 @@ import { VeterinariComponent } from './componenti/veterinari/veterinari.componen
 import { VeterinarioComponent } from './componenti/veterinario/veterinario.component';
 import { WelcomeComponent } from './componenti/welcome/welcome.component';
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
+import { CarrelloComponent } from './componenti/carrello/carrello.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.compo
     VeterinariComponent,
     VeterinarioComponent,
     AppuntamentoComponent,
+    CarrelloComponent, 
   ],
   imports: [
     BrowserModule,
