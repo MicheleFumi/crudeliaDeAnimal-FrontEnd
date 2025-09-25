@@ -1,0 +1,128 @@
+<div class="container py-4">
+  <!-- Filtri -->
+  <div class="mb-4 p-2 bg-white rounded shadow-sm border text-center">
+    <h1>Elenco Veterinari - Ospedali</h1>
+    <h4 class="text-muted">
+      Seleziona il veterinario o l'ospedale più vicino a te
+    </h4>
+  </div>
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <label class="form-label">Regione</label>
+      <select
+        class="form-select"
+        [(ngModel)]="filtro.regione"
+        (change)="filtraPerRegione()"
+      >
+        <option value="">Tutte</option>
+        <option *ngFor="let r of regioni" [value]="r">{{ r }}</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Provincia</label>
+      <select
+        class="form-select"
+        [(ngModel)]="filtro.provincia"
+        (change)="filtraPerProvincia()"
+      >
+        <option value="">Tutte</option>
+        <option *ngFor="let p of province" [value]="p">{{ p }}</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Servizio</label>
+      <select
+        class="form-select"
+        [(ngModel)]="filtro.servizio"
+        (change)="filtraPerServizio()"
+      >
+        <option value="">Tutti</option>
+        <option *ngFor="let s of serviziDisponibili" [value]="s">
+          {{ s.replace("_", " ").toLowerCase() }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label d-block">Tipo struttura</label>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="tipostruttura"
+          value=""
+          [(ngModel)]="filtro.tipostruttura"
+          (change)="filtraPerStruttura()"
+          checked
+        />
+        <label class="form-check-label">Tutte</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="tipostruttura"
+          value="CLINICA"
+          [(ngModel)]="filtro.tipostruttura"
+          (change)="filtraPerStruttura()"
+        />
+        <label class="form-check-label">Clinica</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="tipostruttura"
+          value="OSPEDALE"
+          [(ngModel)]="filtro.tipostruttura"
+          (change)="filtraPerStruttura()"
+        />
+        <label class="form-check-label">Ospedale</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista veterinari -->
+  <div class="row g-4">
+    <div *ngFor="let veterinario of veterinari" class="col-md-6 col-lg-4">
+      <div
+        class="card h-100 shadow-sm"
+        [routerLink]="'/veterinari/' + veterinario?.id"
+      >
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ veterinario.nome }}</h5>
+          <p class="text-muted mb-2">
+            <strong>Struttura:</strong> {{ veterinario.tipostruttura }}
+          </p>
+
+          <p class="mb-1">
+            <strong>Telefono:</strong> {{ veterinario.telefono }}
+          </p>
+          <p class="mb-1">
+            <strong>Email:</strong>
+            <a href="mailto:{{ veterinario.email }}">
+              {{ veterinario.email }}</a
+            >
+          </p>
+          <p class="mb-1">
+            <strong>Indirizzo:</strong> {{ veterinario.indirizzo }},
+            {{ veterinario.cap }}
+          </p>
+          <p class="mb-1">
+            <strong>Provincia:</strong> {{ veterinario.provincia }},
+            <strong>Regione:</strong> {{ veterinario.regione }}
+          </p>
+          <p class="mb-2">
+            <strong>Orari apertura:</strong> {{ veterinario.orariApertura }}
+          </p>
+
+          <div class="mt-auto">
+            <strong>Servizi offerti:</strong>
+            <span>
+              {{ veterinario.serviziVO.replace("_", " ").toLowerCase() }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

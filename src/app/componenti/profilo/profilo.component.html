@@ -1,0 +1,182 @@
+<div class="container my-3">
+  <div class="card" *ngIf="utenteInfo; else loadingTemplate">
+    <h5 class="card-header text-center">Manage your profile</h5>
+    <div class="card-body">
+      <h5 class="card-title">
+        Welcome {{ utenteInfo?.nome }} {{ utenteInfo?.cognome }}
+      </h5>
+      <p class="card-text">Here are your details:</p>
+
+      <dl class="row">
+        <dt class="col-sm-3">Codice Fiscale</dt>
+        <dd class="col-sm-9">{{ utenteInfo?.codiceFiscale }}</dd>
+
+        <dt class="col-sm-3">Telefono</dt>
+        <dd class="col-sm-9">{{ utenteInfo?.telefono }}</dd>
+
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">{{ utenteInfo?.email }}</dd>
+
+        <dt class="col-sm-3">Indirizzo</dt>
+        <dd class="col-sm-9">{{ utenteInfo?.indirizzo }}</dd>
+
+        <dt class="col-sm-3">Role</dt>
+        <dd class="col-sm-9">{{ utenteInfo?.role }}</dd>
+      </dl>
+
+      <div class="text-end">
+        <button
+          type="button"
+          class="btn btn-primary mx-3"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Edit
+        </button>
+        <a (click)="onDelete()" class="btn btn-danger">Delete account</a>
+      </div>
+    </div>
+    <div class="card-footer text-body-secondary">
+      Member since {{ utenteInfo?.dataRegistrazione }}
+    </div>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="card">
+      <div class="card-body text-center">
+        <p>Loading user profile...</p>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Aggiorna i tuoi dati
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="Inputnome" class="form-label">Nome</label>
+              <input
+                id="Inputnome"
+                type="text"
+                class="form-control"
+                formControlName="nome"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label for="Inputcognome" class="form-label">Cognome</label>
+              <input
+                id="Inputcognome"
+                type="text"
+                class="form-control"
+                formControlName="cognome"
+                required
+              />
+            </div>
+
+            <div class="col-12">
+              <label for="Inputindirizzo" class="form-label">Indirizzo</label>
+              <input
+                id="Inputindirizzo"
+                type="text"
+                class="form-control"
+                formControlName="indirizzo"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label for="Inputtelefono" class="form-label">Telefono</label>
+              <input
+                id="Inputtelefono"
+                type="tel"
+                class="form-control"
+                formControlName="telefono"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label for="InputcodiceFiscale" class="form-label"
+                >Codice fiscale</label
+              >
+              <input
+                id="InputcodiceFiscale"
+                type="text"
+                class="form-control"
+                formControlName="codiceFiscale"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label for="exampleInputEmail2" class="form-label">Email</label>
+              <input
+                id="exampleInputEmail2"
+                type="email"
+                class="form-control"
+                formControlName="email"
+                aria-describedby="emailHelp"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label for="InputPassword2" class="form-label">Password</label>
+              <input
+                id="InputPassword2"
+                type="password"
+                class="form-control"
+                formControlName="password"
+              />
+            </div>
+
+            <div class="col-12">
+              <div class="form-check">
+                <input
+                  id="exampleCheck1"
+                  type="checkbox"
+                  class="form-check-input"
+                  formControlName="role"
+                />
+                <label class="form-check-label" for="exampleCheck1"
+                  >Business Account</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary w-100 mt-4"
+            [disabled]="updateForm.invalid"
+          >
+            Update
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

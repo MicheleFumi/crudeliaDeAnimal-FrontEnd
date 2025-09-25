@@ -1,0 +1,103 @@
+<div class="container mt-4">
+  <div class="mb-4 p-2 bg-white rounded shadow-sm border text-center">
+    <h1>Shop Prodotti</h1>
+    <h4 class="text-muted">
+      Trova in un attimo il prodotto giusto per il tuo amico a 4 zampe 🐾
+    </h4>
+  </div>
+  <div class="mb-4 p-4 bg-white rounded shadow-sm border">
+    <div class="row g-4 align-items-start">
+      <!-- 🔍 Searchbar -->
+      <div class="col-md-4">
+        <label class="form-label fw-bold">Cerca prodotto</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light">
+            <i class="bi bi-search"></i>
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Es. crocchette..."
+            [(ngModel)]="searchTerm"
+            (input)="applyFilters()"
+          />
+        </div>
+      </div>
+
+      <!-- 📦 Checkbox categorie -->
+      <div class="col-md-4">
+        <label class="form-label fw-bold">Categorie</label>
+        <div class="d-flex flex-wrap gap-1">
+          <div
+            class="form-check form-check-inline"
+            *ngFor="let cat of categorie"
+          >
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [id]="'cat-' + cat"
+              [value]="cat"
+              (change)="toggleCategoria(cat, $event)"
+            />
+            <label class="form-check-label" [for]="'cat-' + cat">
+              {{ cat }}
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🐾 Checkbox tipoAnimale -->
+      <div class="col-md-4">
+        <label class="form-label fw-bold">Tipo animale</label>
+        <div class="d-flex flex-wrap gap-2">
+          <div
+            class="form-check form-check-inline"
+            *ngFor="let tipo of tipiAnimale"
+          >
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [id]="'tipo-' + tipo"
+              [value]="tipo"
+              (change)="toggleTipoAnimale(tipo, $event)"
+            />
+            <label class="form-check-label" [for]="'tipo-' + tipo">
+              {{ tipo }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista prodotti -->
+  <div class="row">
+    <div *ngFor="let prodotto of filteredProdotti" class="col-md-4 mb-4">
+      <mat-card class="product-card" [routerLink]="'/prodotti/' + prodotto?.id">
+        <img
+          mat-card-image
+          [src]="prodotto?.immagineUrl"
+          alt="{{ prodotto.nomeProdotto }}"
+          class="img-fluid"
+        />
+        <mat-card-content>
+          <h5 class="product-title py-3">
+            {{ prodotto?.nomeProdotto }}
+          </h5>
+          <p class="product-price">€ {{ prodotto?.prezzo }}</p>
+          <p class="product-desc">{{ prodotto?.descrizione }}</p>
+          <span class="badge bg-primary me-1">{{ prodotto?.categoria }}</span>
+          <span class="badge bg-success">{{ prodotto?.tipoAnimale }}</span>
+          <p class="mt-2">
+            Disponibili: <strong>{{ prodotto?.quantitaDisponibile }}</strong>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">
+            🛒 Aggiungi al carrello
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

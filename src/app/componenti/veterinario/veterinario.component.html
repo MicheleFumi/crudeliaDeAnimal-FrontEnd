@@ -1,0 +1,59 @@
+<div class="container py-4" *ngIf="veterinario">
+  <div class="row g-4 justify-content-center">
+    <!-- Colonna info veterinario -->
+    <div class="col-12 col-lg-6">
+      <div class="card h-100 shadow-sm p-3">
+        <h5 class="card-title">{{ veterinario?.nome }}</h5>
+        <p class="text-muted mb-2">
+          <strong>Struttura:</strong> {{ veterinario?.tipostruttura }}
+        </p>
+
+        <p class="mb-1">
+          <strong>Telefono:</strong> {{ veterinario?.telefono }}
+        </p>
+        <p class="mb-1">
+          <strong>Email:</strong>
+          <a href="mailto:{{ veterinario?.email }}">{{ veterinario?.email }}</a>
+        </p>
+        <p class="mb-1">
+          <strong>Indirizzo:</strong> {{ veterinario?.indirizzo }},
+          {{ veterinario?.cap }}
+        </p>
+        <p class="mb-1">
+          <strong>Provincia:</strong> {{ veterinario?.provincia }},
+          <strong>Regione:</strong> {{ veterinario?.regione }}
+        </p>
+        <p class="mb-2">
+          <strong>Orari apertura:</strong> {{ veterinario?.orariApertura }}
+        </p>
+
+        <div class="mb-3">
+          <strong>Servizi offerti:</strong>
+          <span> {{ veterinario?.serviziVO }}</span>
+        </div>
+
+        <button
+          class="btn btn-success mt-2"
+          (click)="prenotaVisita(veterinario)"
+        >
+          Prenota visita
+        </button>
+      </div>
+    </div>
+
+    <!-- Colonna mappa -->
+    <div class="col-12 col-lg-6">
+      <div class="card h-100 shadow-sm p-0">
+        <strong class="p-3 d-block">Posizione:</strong>
+        <iframe
+          width="100%"
+          height="100%"
+          style="min-height: 300px; border: 0"
+          [src]="mapUrl"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</div>

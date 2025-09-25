@@ -1,0 +1,16 @@
+:root {
+  --primary-color: #4caf50; /* Verde brillante per i pulsanti */
+  --secondary-color: #2196f3; /* Blu per i link */
+  --tertiary-color: #555; /* Grigio scuro per i testi */
+  --light-gray: #f4f4f4; /* Grigio chiaro per gli sfondi */
+  --dark-background: #2c3e50; /* Sfondo scuro per il footer */
+  --white: #ffffff;
+  --font-family: "Roboto", sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

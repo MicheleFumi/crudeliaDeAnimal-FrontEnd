@@ -1,0 +1,105 @@
+<mat-dialog-content class="container-fluid py-2">
+  <h5 class="mb-3">{{ titolo }}</h5>
+
+  <mat-card appearance="outlined" class="p-3">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="row g-3">
+      <div class="col-12 col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Animale</mat-label>
+          <mat-select formControlName="id_animale" required>
+            <mat-option *ngFor="let a of animali" [value]="a.id">
+              {{ a.nome_animale }} ({{ a.tipo }} - {{ a.razza }})
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('id_animale')?.hasError('required')"
+            >Obbligatorio</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Data visita</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dp"
+            formControlName="data_visita"
+            required
+          />
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker #dp></mat-datepicker>
+          <mat-error *ngIf="form.get('data_visita')?.hasError('required')"
+            >Obbligatorio</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Ora visita</mat-label>
+          <input
+            matInput
+            type="time"
+            step="60"
+            formControlName="ora_visita"
+            required
+          />
+          <mat-error *ngIf="form.get('ora_visita')?.hasError('required')"
+            >Obbligatorio</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Motivo</mat-label>
+          <textarea
+            matInput
+            rows="3"
+            formControlName="motivo_visita"
+            placeholder="Descrivi il motivo"
+            required
+          ></textarea>
+          <mat-error *ngIf="form.get('motivo_visita')?.hasError('required')"
+            >Obbligatorio</mat-error
+          >
+          <mat-error *ngIf="form.get('motivo_visita')?.hasError('maxlength')"
+            >Max 255 caratteri</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Pagamento</mat-label>
+          <mat-select formControlName="tipo_pagamento" required>
+            <mat-option value="CARTA">CARTA</mat-option>
+            <mat-option value="CONTANTI">CONTANTI</mat-option>
+            <mat-option value="PAYPAL">PAYPAL</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-12">
+        <div *ngIf="formError" class="alert alert-danger">{{ formError }}</div>
+      </div>
+
+      <div class="col-12 d-flex justify-content-end gap-2">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="form.invalid || submitting"
+        >
+          {{ "Crea" }}
+        </button>
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          mat-dialog-close
+        >
+          Chiudi
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</mat-dialog-content>

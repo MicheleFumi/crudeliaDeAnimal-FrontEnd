@@ -1,0 +1,108 @@
+<section
+  class="d-flex align-items-center py-5"
+  style="
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa, #e9f5ff);
+  "
+>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-5">
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4 p-lg-5">
+            <div class="text-center mb-4">
+              <h1 class="h3 mb-1 fw-normal">Sign in</h1>
+              <p class="text-muted mb-0">Accesso al tuo account</p>
+            </div>
+
+            <form
+              [formGroup]="signinform"
+              (ngSubmit)="onSubmit()"
+              novalidate
+              class="needs-validation"
+            >
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Email address</label
+                >
+                <input
+                  name="email"
+                  formControlName="email"
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  [class.is-invalid]="
+                    signinform.get('email')?.invalid &&
+                    (signinform.get('email')?.dirty ||
+                      signinform.get('email')?.touched)
+                  "
+                />
+                <div id="emailHelp" class="form-text">
+                  We'll never share your email with anyone else.
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="signinform.get('email')?.errors?.['required']"
+                >
+                  Email obbligatoria.
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="signinform.get('email')?.errors?.['email']"
+                >
+                  Formato email non valido.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="InputPassword1" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="password"
+                  formControlName="password"
+                  id="InputPassword1"
+                  [class.is-invalid]="
+                    signinform.get('password')?.invalid &&
+                    (signinform.get('password')?.dirty ||
+                      signinform.get('password')?.touched)
+                  "
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="signinform.get('password')?.errors?.['required']"
+                >
+                  Password obbligatoria.
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="signinform.get('password')?.errors?.['minlength']"
+                >
+                  Minimo 6 caratteri.
+                </div>
+              </div>
+
+              <div
+                class="d-flex justify-content-between align-items-center mb-4"
+              ></div>
+
+              <button
+                type="submit"
+                class="btn btn-primary w-100"
+                [disabled]="signinform.invalid"
+              >
+                Sign in
+              </button>
+              <p class="mt-4 mb-0 text-center text-danger">{{ msg }}</p>
+              <div class="text-center mt-4">
+                <span class="text-muted">Non hai un account?</span>
+                <a routerLink="/auth/register" class="ms-1">Registrati</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

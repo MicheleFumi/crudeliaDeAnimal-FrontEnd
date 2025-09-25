@@ -1,0 +1,271 @@
+<section
+  class="d-flex align-items-center py-5"
+  style="
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa, #e9f5ff);
+  "
+>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-7">
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4 p-lg-5">
+            <div class="text-center mb-4">
+              <h1 class="h3 mb-1 fw-normal">Registrazione</h1>
+              <p class="text-muted mb-0">Crea il tuo account</p>
+            </div>
+
+            <form
+              [formGroup]="registrazioneform"
+              (ngSubmit)="OnRegistrazione()"
+              novalidate
+              class="needs-validation"
+            >
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="Inputnome" class="form-label">Nome</label>
+                  <input
+                    id="Inputnome"
+                    type="text"
+                    class="form-control"
+                    formControlName="nome"
+                    [class.is-invalid]="
+                      fc['nome'].invalid &&
+                      (fc['nome'].dirty || fc['nome'].touched)
+                    "
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['nome'].errors?.['required']"
+                  >
+                    Nome obbligatorio.
+                  </div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['nome'].errors?.['pattern']"
+                  >
+                    Solo lettere e spazi.
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="Inputcognome" class="form-label">Cognome</label>
+                  <input
+                    id="Inputcognome"
+                    type="text"
+                    class="form-control"
+                    formControlName="cognome"
+                    [class.is-invalid]="
+                      fc['cognome'].invalid &&
+                      (fc['cognome'].dirty || fc['cognome'].touched)
+                    "
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['cognome'].errors?.['required']"
+                  >
+                    Cognome obbligatorio.
+                  </div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['cognome'].errors?.['pattern']"
+                  >
+                    Solo lettere e spazi.
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label for="Inputindirizzo" class="form-label"
+                    >Indirizzo</label
+                  >
+                  <input
+                    id="Inputindirizzo"
+                    type="text"
+                    class="form-control"
+                    formControlName="indirizzo"
+                    [class.is-invalid]="
+                      fc['indirizzo'].invalid &&
+                      (fc['indirizzo'].dirty || fc['indirizzo'].touched)
+                    "
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['indirizzo'].errors?.['required']"
+                  >
+                    Indirizzo obbligatorio.
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="Inputtelefono" class="form-label">Telefono</label>
+                  <input
+                    id="Inputtelefono"
+                    type="tel"
+                    class="form-control"
+                    formControlName="telefono"
+                    [class.is-invalid]="
+                      fc['telefono'].invalid &&
+                      (fc['telefono'].dirty || fc['telefono'].touched)
+                    "
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['telefono'].errors?.['required']"
+                  >
+                    Telefono obbligatorio.
+                  </div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['telefono'].errors?.['pattern']"
+                  >
+                    Formato non valido.
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="InputcodiceFiscale" class="form-label"
+                    >Codice fiscale</label
+                  >
+                  <input
+                    id="InputcodiceFiscale"
+                    type="text"
+                    class="form-control"
+                    formControlName="codiceFiscale"
+                    [class.is-invalid]="
+                      fc['codiceFiscale'].invalid &&
+                      (fc['codiceFiscale'].dirty || fc['codiceFiscale'].touched)
+                    "
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['codiceFiscale'].errors?.['required']"
+                  >
+                    Codice fiscale obbligatorio.
+                  </div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['codiceFiscale'].errors?.['minlength'] || fc['codiceFiscale'].errors?.['maxlength']"
+                  >
+                    Lunghezza esatta 16 caratteri.
+                  </div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['codiceFiscale'].errors?.['pattern']"
+                  >
+                    Formato CF non valido.
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="exampleInputEmail2" class="form-label"
+                    >Email</label
+                  >
+                  <input
+                    id="exampleInputEmail2"
+                    type="email"
+                    class="form-control"
+                    formControlName="email"
+                    aria-describedby="emailHelp"
+                    [class.is-invalid]="
+                      fc['email'].invalid &&
+                      (fc['email'].dirty || fc['email'].touched)
+                    "
+                  />
+                  <div id="emailHelp" class="form-text">
+                    We'll never share your email with anyone else.
+                  </div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['email'].errors?.['required']"
+                  >
+                    Email obbligatoria.
+                  </div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['email'].errors?.['email']"
+                  >
+                    Formato email non valido.
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="InputPassword2" class="form-label"
+                    >Password</label
+                  >
+                  <input
+                    id="InputPassword2"
+                    type="password"
+                    class="form-control"
+                    formControlName="password"
+                    [class.is-invalid]="
+                      fc['password'].invalid &&
+                      (fc['password'].dirty || fc['password'].touched)
+                    "
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['password'].errors?.['required']"
+                  >
+                    Password obbligatoria.
+                  </div>
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="fc['password'].errors?.['minlength']"
+                  >
+                    Minimo 6 caratteri.
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="InputPasswordConfirm" class="form-label"
+                    >Conferma password</label
+                  >
+                  <input
+                    id="InputPasswordConfirm"
+                    type="password"
+                    class="form-control"
+                    formControlName="passwordConfirm"
+                    [class.is-invalid]="registrazioneform.errors?.['passwordMismatch'] && (fc['passwordConfirm'].dirty || fc['passwordConfirm'].touched)"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="registrazioneform.errors?.['passwordMismatch']"
+                  >
+                    Le password non coincidono.
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-check">
+                    <input
+                      id="exampleCheck1"
+                      type="checkbox"
+                      class="form-check-input"
+                      formControlName="role"
+                    />
+                    <label class="form-check-label" for="exampleCheck1"
+                      >Business Account</label
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary w-100 mt-4"
+                [disabled]="registrazioneform.invalid"
+              >
+                Registrati
+              </button>
+
+              <div class="text-center mt-4">
+                <span class="text-muted">Hai già un account?</span>
+                <a routerLink="/auth/signin" class="ms-1">Accedi</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <div class="row">
+    <!-- Immagine -->
+    <div class="col-md-6">
+      <mat-card class="product-detail-card">
+        <img
+          mat-card-image
+          [src]="prodotto?.immagineUrl"
+          alt="{{ prodotto.nomeProdotto }}"
+          class="img-fluid"
+        />
+      </mat-card>
+    </div>
+
+    <!-- Dettagli -->
+    <div class="col-md-6">
+      <mat-card class="product-detail-card p-4">
+        <h2 class="mb-3">{{ prodotto?.nomeProdotto }}</h2>
+        <p class="product-price h4 text-success">€ {{ prodotto?.prezzo }}</p>
+
+        <p class="product-desc mt-3">{{ prodotto?.descrizione }}</p>
+
+        <div class="mb-3">
+          <span class="badge bg-primary me-2">{{ prodotto?.categoria }}</span>
+          <span class="badge bg-success">{{ prodotto?.tipoAnimale }}</span>
+        </div>
+
+        <p>
+          Disponibili: <strong>{{ prodotto?.quantitaDisponibile }}</strong>
+        </p>
+
+        <mat-card-actions class="mt-4">
+          <button *ngIf="isLogged" mat-raised-button color="primary">
+            Aggiungi al carrello
+          </button>
+          <a
+            href="/auth/signin"
+            *ngIf="!isLogged"
+            class="btn btn-primary"
+            color="primary"
+          >
+            Accedi o registrati per aquistare l'articolo
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

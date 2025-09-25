@@ -1,0 +1,272 @@
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+  rel="stylesheet"
+/>
+
+<!-- Hero -->
+<section
+  class="py-5 text-center text-white"
+  style="background: linear-gradient(135deg, #1f7a8c, #022b3a)"
+>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-12 col-lg-7">
+        <h1 class="display-4 fw-bold mb-3">Crudelia de Animal</h1>
+        <p class="lead mb-4">
+          E‑shop di prodotti per la cura degli animali con prenotazione visite
+          veterinarie e rete di ospedali/cliniche partner. Acquista, gestisci i
+          tuoi animali, e prenota visite in pochi click.
+        </p>
+        <div
+          class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start"
+        >
+          <a routerLink="/prodotti" class="btn btn-light btn-lg">
+            <i class="bi bi-bag me-2"></i> Vai allo Shop
+          </a>
+          <a routerLink="/veterinari" class="btn btn-outline-light btn-lg">
+            <i class="bi bi-hospital me-2"></i> Trova Ospedali
+          </a>
+          <a routerLink="/appointments" class="btn btn-outline-light btn-lg">
+            <i class="bi bi-calendar-check me-2"></i> Prenota Visita
+          </a>
+        </div>
+        <p class="small mt-3 opacity-75">
+          Categorie, disponibilità prodotti e servizi ospedalieri si basano sul
+          tuo profilo utente registrato.
+        </p>
+      </div>
+      <div class="col-12 col-lg-5">
+        <div class="bg-white text-dark rounded-4 shadow p-4">
+          <h2 class="h4 mb-3">Gestione rapida</h2>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2">
+              <i class="bi bi-heart-pulse-fill text-danger me-2"></i>
+              Prodotti per specie e categorie: farmaci, dermatologia, vaccini, e
+              altro.
+            </li>
+            <li class="mb-2">
+              <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+              Ospedali/cliniche con orari, servizi e contatti verificati.
+            </li>
+            <li class="mb-2">
+              <i class="bi bi-clipboard2-check-fill text-success me-2"></i>
+              Prenotazioni visite con stato e pagamenti a scelta.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Key features mapped to DB -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-4">Cosa offre la piattaforma</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-bag fs-3 text-primary me-2"></i>
+              <h3 class="h5 mb-0">E‑shop Prodotti</h3>
+            </div>
+            <p class="mb-2">
+              Catalogo per categoria, tipo animale, disponibilità e prezzo con
+              immagini e descrizioni.
+            </p>
+            <ul class="small mb-3">
+              <li>
+                Tabella: prodotto-animali (nome_prodotto, categoria,
+                tipo_animale, prezzo, quantita_disponibile).
+              </li>
+            </ul>
+            <a routerLink="/prodotti" class="btn btn-outline-primary btn-sm"
+              >Sfoglia prodotti</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-hospital fs-3 text-danger me-2"></i>
+              <h3 class="h5 mb-0">Ospedali e Cliniche</h3>
+            </div>
+            <p class="mb-2">
+              Rete di strutture sanitarie con servizi offerti, indirizzi e orari
+              di apertura.
+            </p>
+            <ul class="small mb-3">
+              <li>
+                Tabella: veterinario-ospedali (servizi_offerti,
+                strutture_sanitarie, contatti, luogo).
+              </li>
+            </ul>
+            <a routerLink="/veterinari" class="btn btn-outline-danger btn-sm"
+              >Cerca strutture</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-calendar2-check fs-3 text-success me-2"></i>
+              <h3 class="h5 mb-0">Prenotazione Visite</h3>
+            </div>
+            <p class="mb-2">
+              Prenota visite per i tuoi animali con stato e tipo di pagamento
+              configurabili.
+            </p>
+            <ul class="small mb-3">
+              <li>
+                Tabella: prenotazione_visita (data/ora, motivo, stato_visita,
+                tipo_pagamento).
+              </li>
+            </ul>
+            <a routerLink="/appointments" class="btn btn-outline-success btn-sm"
+              >Prenota ora</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Come funziona</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="h-100 p-4 border rounded-3">
+          <div class="d-flex align-items-center mb-2">
+            <span class="badge bg-primary me-2">1</span>
+            <h3 class="h6 mb-0">Registra profilo</h3>
+          </div>
+          <p class="mb-0">
+            Crea un account e registra i tuoi animali con note mediche per una
+            gestione completa.
+          </p>
+          <p class="small text-muted mt-2">Tabelle: utente, animale.</p>
+          <a routerLink="/auth/register" class="small">Crea account</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="h-100 p-4 border rounded-3">
+          <div class="d-flex align-items-center mb-2">
+            <span class="badge bg-primary me-2">2</span>
+            <h3 class="h6 mb-0">Acquista prodotti</h3>
+          </div>
+          <p class="mb-0">
+            Aggiungi prodotti al carrello, conferma l’ordine e monitora lo stato
+            dell’acquisto.
+          </p>
+          <p class="small text-muted mt-2">
+            Tabelle: ordine, ordine_prodotto, prodotto-animali.
+          </p>
+          <a routerLink="/prodotti" class="small">Vai allo shop</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="h-100 p-4 border rounded-3">
+          <div class="d-flex align-items-center mb-2">
+            <span class="badge bg-primary me-2">3</span>
+            <h3 class="h6 mb-0">Prenota visite</h3>
+          </div>
+          <p class="mb-0">
+            Scegli struttura, data e ora; gestisci stati visita e metodo di
+            pagamento (carta, contanti, PayPal).
+          </p>
+          <p class="small text-muted mt-2">
+            Tabelle: prenotazione_visita, veterinario-ospedali.
+          </p>
+          <a routerLink="/appointments" class="small">Prenota una visita</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust and highlights -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-md-6">
+        <h2 class="h4 mb-3">Perché scegliere noi</h2>
+        <ul class="mb-0">
+          <li class="mb-2">
+            <i class="bi bi-shield-check text-success me-2"></i>Dati sicuri e
+            ruoli (ADMIN, MEDICO, USER) per un accesso controllato.
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-box-seam text-primary me-2"></i>Catalogo curato per
+            specie, categorie e disponibilità in tempo reale.
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-hospital text-danger me-2"></i>Strutture sanitarie
+            verificate con servizi come chirurgia, pronto soccorso e
+            radiografie.
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <div class="p-4 bg-white rounded-3 shadow-sm">
+          <h3 class="h6 text-uppercase text-muted mb-3">Info database</h3>
+          <div class="row">
+            <div class="col-6">
+              <ul class="small mb-0">
+                <li>utente</li>
+                <li>animale</li>
+                <li>prodotto-animali</li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <ul class="small mb-0">
+                <li>ordine / ordine_prodotto</li>
+                <li>prenotazione_visita</li>
+                <li>veterinario-ospedali</li>
+              </ul>
+            </div>
+          </div>
+          <p class="small text-muted mt-3 mb-0">
+            Relazioni impostate con chiavi esterne per integrità referenziale.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer CTA -->
+<footer class="py-5 text-center">
+  <div class="container">
+    <h2 class="h4 mb-3">Pronto a iniziare?</h2>
+    <p class="mb-4">
+      Registrati o accedi per gestire animali, ordini e prenotazioni in un’unica
+      piattaforma.
+    </p>
+    <div class="d-flex gap-3 justify-content-center">
+      <a routerLink="/auth/register" class="btn btn-primary">
+        <i class="bi bi-person-plus me-2"></i> Registrati
+      </a>
+      <a routerLink="/auth/signin" class="btn btn-outline-primary">
+        <i class="bi bi-box-arrow-in-right me-2"></i> Accedi
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Optional fine-tuning */
+  .lead {
+    line-height: 1.6;
+  }
+  .card .small {
+    color: #6c757d;
+  }
+</style>
