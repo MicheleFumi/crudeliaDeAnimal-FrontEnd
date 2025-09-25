@@ -22,8 +22,10 @@ export class AnimaliService {
   }
 
   update(animale: any) {
-    console.log(animale);
-
     return this.http.post(this.url + 'update', animale);
+  }
+
+  delete(animale: {}) {
+    return this.http.post(this.url + 'delete', animale);
   }
 }

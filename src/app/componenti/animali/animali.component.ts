@@ -79,7 +79,15 @@ export class AnimaliComponent implements OnInit {
   }
 
   elimina(animale: any) {
-    console.log('Eliminato:', animale);
+    this.service.delete(animale).subscribe((resp: any) => {
+      if (resp.rc) {
+        this.routing.navigate(['/animali', this.id]).then(() => {
+          window.location.reload();
+        });
+      } else {
+        this.msg = resp.msg;
+      }
+    });
   }
 
   openUpdateModal(animale: any) {
