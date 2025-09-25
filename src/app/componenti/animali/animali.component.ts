@@ -36,17 +36,24 @@ export class AnimaliComponent implements OnInit {
         });
       }
     });
-
     this.isLogged = this.auth.isAutentificated();
   }
 
   updateForm: FormGroup = new FormGroup({
     id: new FormControl(),
-    nomeAnimale: new FormControl(),
-    razza: new FormControl(),
-    noteMediche: new FormControl(),
+    nomeAnimale: new FormControl('', Validators.required),
+    tipo: new FormControl('', Validators.required),
+    razza: new FormControl('', Validators.required),
+    noteMediche: new FormControl('', Validators.required),
+    utente: new FormControl(this.id),
+  });
+
+  createForm: FormGroup = new FormGroup({
+    nomeAnimale: new FormControl('', Validators.required),
+    tipo: new FormControl('', Validators.required),
+    razza: new FormControl('', Validators.required),
+    noteMediche: new FormControl('', Validators.required),
     utente: new FormControl(),
-    tipo: new FormControl(),
   });
 
   OnUpdate() {
@@ -78,7 +85,7 @@ export class AnimaliComponent implements OnInit {
     });
   }
 
-  elimina(animale: any) {
+  onDelete(animale: any) {
     this.service.delete(animale).subscribe((resp: any) => {
       if (resp.rc) {
         this.routing.navigate(['/animali', this.id]).then(() => {
@@ -99,5 +106,19 @@ export class AnimaliComponent implements OnInit {
     this.selectedAnimale = null;
     this.updateForm.reset();
   }
-  aggiungiAnimale() {}
+
+  onCreate() {
+    const params = this.createForm.value;
+
+    params.utente = { id: this.id };
+    this.service.create(params).subscribe((resp: any) => {
+      if (resp.rc) {
+        this.routing.navigate(['/animali', this.id]).then(() => {
+          window.location.reload();
+        });
+      } else {
+        this.msg = resp.msg;
+      }
+    });
+  }
 }

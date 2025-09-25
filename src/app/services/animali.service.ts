@@ -28,4 +28,8 @@ export class AnimaliService {
   delete(animale: {}) {
     return this.http.post(this.url + 'delete', animale);
   }
+
+  create(animale: {}) {
+    return this.http.post(this.url + 'create', animale);
+  }
 }
