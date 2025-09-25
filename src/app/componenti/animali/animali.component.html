@@ -19,9 +19,9 @@
         class="p-3 d-flex flex-row align-items-center"
       >
         <!-- Icona -->
-        <div class="me-3 fs-3 text-primary">
+        <div class="me-3 text-primary d-flex flex-column align-items-center">
           <i
-            class="fa-solid"
+            class="fa-solid fs-3"
             [ngClass]="{
               'fa-dog': animale.tipo === 'cane',
               'fa-cat': animale.tipo === 'gatto',
@@ -31,6 +31,7 @@
               'fa-paw': animale.tipo === 'roditore'
             }"
           ></i>
+          <div class="fs-6 mt-2 text-black">{{ animale.tipo }}</div>
         </div>
 
         <!-- Info -->
