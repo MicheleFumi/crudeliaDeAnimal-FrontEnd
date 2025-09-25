@@ -1,4 +1,5 @@
 <div class="container">
+  <!-- Header -->
   <div class="d-flex justify-content-between align-items-center my-3">
     <h1 class="text-center">I tuoi animali</h1>
     <a class="btn btn-primary btn-sm" href="#" role="button">
@@ -6,57 +7,57 @@
     </a>
   </div>
 
+  <!-- Lista animali -->
   <div class="row">
     <div class="col-12" *ngFor="let animale of animali">
-      <div class="card mb-3 shadow-sm">
-        <div class="row g-0 align-items-center">
-          <!-- Badge tipo animale -->
-          <div
-            class="col-md-2 d-flex justify-content-center align-items-center"
+      <div class="card mb-3 shadow-sm p-3 d-flex flex-row align-items-center">
+        <!-- Icona -->
+        <div class="me-3 fs-3 text-primary">
+          <i
+            class="fa-solid"
+            [ngClass]="{
+              'fa-dog': animale.tipo === 'cane',
+              'fa-cat': animale.tipo === 'gatto',
+              'fa-dove': animale.tipo === 'uccello',
+              'fa-dragon': animale.tipo === 'rettile',
+              'fa-paw': animale.tipo === 'roditore'
+            }"
+          ></i>
+        </div>
+
+        <!-- Info -->
+        <div class="flex-grow-1">
+          <h5 class="mb-1">{{ animale.nomeAnimale }}</h5>
+          <p class="mb-1 text-muted">
+            <strong>Razza:</strong> {{ animale.razza }}
+          </p>
+          <p class="mb-0">
+            <strong>Note Mediche:</strong> {{ animale.noteMediche }}
+          </p>
+        </div>
+
+        <!-- Azioni -->
+        <div class="ms-3 text-nowrap">
+          <button
+            type="button"
+            class="btn btn-warning btn-sm"
+            data-bs-toggle="modal"
+            [attr.data-bs-target]="'#updateModal'"
           >
-            <span
-              class="badge fs-6 px-3 py-2"
-              [ngClass]="getBadgeClass(animale.tipo)"
-            >
-              {{ animale.tipo }}
-            </span>
-          </div>
-
-          <!-- Info -->
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{{ animale.nomeAnimale }}</h5>
-              <p class="card-text mb-1">
-                <strong>Razza:</strong> {{ animale.razza }}
-              </p>
-              <p class="card-text">
-                <strong>Note Mediche:</strong> {{ animale.noteMediche }}
-              </p>
-            </div>
-          </div>
-
-          <!-- Azioni -->
-          <div class="col-md-2 text-center">
-            <button
-              class="btn btn-warning btn-sm me-1"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModalUpdate"
-            >
-              Modifica
-            </button>
-            <button
-              class="btn btn-danger btn-sm"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModalDelete"
-            >
-              Elimina
-            </button>
-          </div>
+            Modifica
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            data-bs-toggle="modal"
+            [attr.data-bs-target]="'#deleteModal' + animale.id"
+          >
+            Elimina
+          </button>
         </div>
       </div>
 
       <!-- Modal Modifica -->
-      <div class="modal fade" id="exampleModalUpdate" tabindex="-1">
+      <div class="modal fade" [id]="'updateModal'" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -119,11 +120,7 @@
       </div>
 
       <!-- Modal Elimina -->
-      <div
-        class="modal fade"
-        tabindex="-1"
-        data-bs-target="#exampleModalDelete"
-      >
+      <div class="modal fade" [id]="'deleteModal' + animale.id" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">

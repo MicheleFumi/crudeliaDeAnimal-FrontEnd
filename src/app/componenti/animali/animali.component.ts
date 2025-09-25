@@ -49,7 +49,7 @@ export class AnimaliComponent implements OnInit {
   getBadgeClass(tipo: string): string {
     switch (tipo?.toLowerCase()) {
       case 'cane':
-        return 'bg-primary';
+        return 'fa-solid fa-dog';
       case 'gatto':
         return 'bg-success';
       case 'uccello':
