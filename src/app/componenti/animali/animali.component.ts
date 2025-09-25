@@ -17,6 +17,8 @@ export class AnimaliComponent implements OnInit {
   msg: any;
   tipi: string[] = ['cane', 'gatto', 'uccello', 'pesce', 'roditore', 'rettile'];
   selectedAnimale: any = null;
+  updateForm!: FormGroup;
+  createForm!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,35 +28,41 @@ export class AnimaliComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      const idParam = params.get('id');
-      if (idParam !== null) {
-        this.id = +idParam;
-        this.service.findByUserId(this.id).subscribe((resp: any) => {
-          this.animali = resp.dati;
-          console.log(this.animali[0]);
-        });
-      }
-    });
     this.isLogged = this.auth.isAutentificated();
+    if (this.isLogged) {
+      this.route.paramMap.subscribe((params: ParamMap) => {
+        const idParam = params.get('id');
+        if (idParam !== null) {
+          this.id = +idParam;
+          this.service.findByUserId(this.id).subscribe((resp: any) => {
+            this.animali = resp.dati;
+            console.log(this.animali[0]);
+          });
+        } else {
+          this.routing.navigate(['/signin']).then(() => {
+            window.location.reload();
+          });
+        }
+      });
+    }
+
+    this.updateForm = new FormGroup({
+      id: new FormControl(),
+      nomeAnimale: new FormControl('', Validators.required),
+      tipo: new FormControl('', Validators.required),
+      razza: new FormControl('', Validators.required),
+      noteMediche: new FormControl('', Validators.required),
+      utente: new FormControl(this.id),
+    });
+
+    this.createForm = new FormGroup({
+      nomeAnimale: new FormControl('', Validators.required),
+      tipo: new FormControl('', Validators.required),
+      razza: new FormControl('', Validators.required),
+      noteMediche: new FormControl('', Validators.required),
+      utente: new FormControl(),
+    });
   }
-
-  updateForm: FormGroup = new FormGroup({
-    id: new FormControl(),
-    nomeAnimale: new FormControl('', Validators.required),
-    tipo: new FormControl('', Validators.required),
-    razza: new FormControl('', Validators.required),
-    noteMediche: new FormControl('', Validators.required),
-    utente: new FormControl(this.id),
-  });
-
-  createForm: FormGroup = new FormGroup({
-    nomeAnimale: new FormControl('', Validators.required),
-    tipo: new FormControl('', Validators.required),
-    razza: new FormControl('', Validators.required),
-    noteMediche: new FormControl('', Validators.required),
-    utente: new FormControl(),
-  });
 
   OnUpdate() {
     const params = this.updateForm.value;
