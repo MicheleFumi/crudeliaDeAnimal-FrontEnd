@@ -22,16 +22,8 @@ export class AnimaliComponent implements OnInit {
     private route: ActivatedRoute,
     private service: AnimaliService,
     private auth: AuthService,
-    private router: Router
+    private routing: Router
   ) {}
-
-  updateForm: FormGroup = new FormGroup({
-    nomeAnimale: new FormControl(),
-    razza: new FormControl(),
-    noteMediche: new FormControl(),
-    utente: new FormControl(),
-    tipo: new FormControl(),
-  });
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -48,28 +40,42 @@ export class AnimaliComponent implements OnInit {
     this.isLogged = this.auth.isAutentificated();
   }
 
-  getBadgeClass(tipo: string): string {
-    switch (tipo?.toLowerCase()) {
-      case 'cane':
-        return 'fa-solid fa-dog';
-      case 'gatto':
-        return 'bg-success';
-      case 'uccello':
-        return 'bg-info text-dark';
-      case 'pesce':
-        return 'bg-warning text-dark';
-      case 'roditore':
-        return 'bg-danger';
-      case 'rettile':
-        return 'bg-secondary';
-      default:
-        return 'bg-dark';
-    }
-  }
+  updateForm: FormGroup = new FormGroup({
+    id: new FormControl(),
+    nomeAnimale: new FormControl(),
+    razza: new FormControl(),
+    noteMediche: new FormControl(),
+    utente: new FormControl(),
+    tipo: new FormControl(),
+  });
 
   OnUpdate() {
     const params = this.updateForm.value;
     console.log('Salvato:', params);
+    if (this.updateForm.controls['nomeAnimale'].touched) {
+      params.nomeAnimale = this.updateForm.value.nomeAnimale;
+    }
+    if (this.updateForm.controls['razza'].touched) {
+      params.razza = this.updateForm.value.razza;
+    }
+    if (this.updateForm.controls['tipo'].touched) {
+      params.tipo = this.updateForm.value.tipo;
+    }
+    if (this.updateForm.controls['noteMediche'].touched) {
+      params.noteMediche = this.updateForm.value.noteMediche;
+    }
+    if (this.updateForm.controls['utente'].touched) {
+      params.utente = this.updateForm.value.utente;
+    }
+    this.service.update(params).subscribe((resp: any) => {
+      if (resp.rc) {
+        this.routing.navigate(['/animali', this.id]).then(() => {
+          window.location.reload();
+        });
+      } else {
+        this.msg = resp.msg;
+      }
+    });
   }
 
   elimina(animale: any) {

@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
 export class AnimaliService {
   url = 'http://localhost:9090/rest/animale/';
   constructor(private http: HttpClient) {}
+
   listAnimali() {
-    return;
-    this.http.get(this.url + 'listAll');
+    return this.http.get(this.url + 'listAll');
   }
   findById(id: number) {
     let param = new HttpParams().set('id', id);
@@ -22,6 +22,8 @@ export class AnimaliService {
   }
 
   update(animale: any) {
-    return this.http.put(this.url + 'update', animale);
+    console.log(animale);
+
+    return this.http.post(this.url + 'update', animale);
   }
 }
