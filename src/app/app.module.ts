@@ -86,7 +86,7 @@ import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.compo
     BrowserAnimationsModule,
     NgClass,
     MatRadioModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
   ],
   providers: [
     provideClientHydration(withEventReplay()),
