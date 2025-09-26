@@ -1,4 +1,4 @@
-import { CommonModule,   NgClass } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -37,9 +37,6 @@ import { VeterinariComponent } from './componenti/veterinari/veterinari.componen
 import { VeterinarioComponent } from './componenti/veterinario/veterinario.component';
 import { WelcomeComponent } from './componenti/welcome/welcome.component';
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
-import { CreateAnimaleDirective } from './dialogs/animale/create-animale.directive';
-import { UpdateAnimaleDirective } from './dialogs/animale/update-animale.directive';
-import { DeleteAnimaleDirective } from './dialogs/animale/delete-animale.directive';
 import { CreateAnimaleComponent } from './dialogs/animale/create-animale/create-animale.component';
 import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-animale.component';
 
@@ -61,9 +58,6 @@ import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-
     VeterinariComponent,
     VeterinarioComponent,
     AppuntamentoComponent,
-    CreateAnimaleDirective,
-    UpdateAnimaleDirective,
-    DeleteAnimaleDirective,
     CreateAnimaleComponent,
     UpdateAnimaleComponent,
   ],
