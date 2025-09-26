@@ -12,7 +12,7 @@
   </div>
 
   <!-- Lista animali -->
-  <div *ngIf="animali; else noAnimali">
+  <div *ngIf="animali && animali.length > 0; else noAnimali">
     <div class="row" *ngFor="let animale of animali">
       <div class="col-12 mb-3">
         <mat-card
