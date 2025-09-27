@@ -7,8 +7,7 @@ import {
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AppuntamentoComponent } from '../../appuntamento/appuntamento.component';
-import { UtenteService } from '../../../services/utente.service';
+
 import { AnimaliService } from '../../../services/animali.service';
 
 @Component({
@@ -19,7 +18,6 @@ import { AnimaliService } from '../../../services/animali.service';
 })
 export class UpdateAnimaleComponent implements OnInit {
   private fb = inject(FormBuilder);
-  private dialogRef = inject(MatDialogRef<AppuntamentoComponent>);
 
   msg: string = '';
   id!: number;
