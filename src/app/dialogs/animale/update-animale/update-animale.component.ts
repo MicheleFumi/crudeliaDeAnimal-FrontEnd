@@ -24,22 +24,28 @@ export class UpdateAnimaleComponent implements OnInit {
   msg: string = '';
   id!: number;
   form!: FormGroup;
+
   constructor(
-    private routing: Router,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private animale: AnimaliService
+    private service: AnimaliService
   ) {}
+
+  tipi = ['cane', 'gatto', 'uccello', 'roditore', 'pesce', 'rettile'];
 
   ngOnInit(): void {
     this.form = this.fb.group({
+      id: [this.data?.animale?.id || null],
       nomeAnimale: ['', Validators.required],
       razza: ['', Validators.required],
       tipo: ['', Validators.required],
       noteMediche: ['', [Validators.maxLength(500)]],
+      utente: { id: Number(localStorage.getItem('idUtente')) || null },
     });
     //serve per valorizzare i campi passati
     if (this.data && this.data.animale) {
       this.form.patchValue({
+        id: this.data.animale.id,
         nomeAnimale: this.data.animale.nomeAnimale,
         razza: this.data.animale.razza,
         tipo: this.data.animale.tipo,
@@ -49,25 +55,16 @@ export class UpdateAnimaleComponent implements OnInit {
   }
 
   onSubmit() {
-    /*
-    const params = this.updateForm.value;
-    console.log('Salvato:', params);
-    if (this.updateForm.controls['nomeAnimale'].touched) {
-      params.nomeAnimale = this.updateForm.value.nomeAnimale;
-    }
-    if (this.updateForm.controls['razza'].touched) {
-      params.razza = this.updateForm.value.razza;
-    }
-    if (this.updateForm.controls['tipo'].touched) {
-      params.tipo = this.updateForm.value.tipo;
-    }
-    if (this.updateForm.controls['noteMediche'].touched) {
-      params.noteMediche = this.updateForm.value.noteMediche;
-    }
-    if (this.updateForm.controls['utente'].touched) {
-      params.utente = this.updateForm.value.utente;
-    }
-  
-  */
+    const params = this.form.value;
+    console.log(params);
+
+    this.service.update(params).subscribe((resp: any) => {
+      if (resp.rc) {
+        this.router.navigate(['animali/:id']);
+        window.location.reload();
+      } else {
+        this.msg = resp.msg;
+      }
+    });
   }
 }

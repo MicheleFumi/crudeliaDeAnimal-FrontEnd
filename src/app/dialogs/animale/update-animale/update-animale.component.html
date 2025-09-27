@@ -4,6 +4,7 @@
       <!-- Nome Animale -->
       <div class="col-12 col-md-6">
         <mat-form-field appearance="outline" class="w-100">
+          <input type="hidden" formControlName="id" required />
           <mat-label>Nome Animale</mat-label>
           <input matInput type="text" formControlName="nomeAnimale" required />
           <mat-error *ngIf="form.get('nomeAnimale')?.hasError('required')">
@@ -28,10 +29,9 @@
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Tipo</mat-label>
           <mat-select formControlName="tipo" required>
-            <mat-option value="CANE">Cane</mat-option>
-            <mat-option value="GATTO">Gatto</mat-option>
-            <mat-option value="UCCELLO">Uccello</mat-option>
-            <mat-option value="ALTRO">Altro</mat-option>
+            <mat-option *ngFor="let t of tipi" [value]="t">
+              {{ t }}
+            </mat-option>
           </mat-select>
           <mat-error *ngIf="form.get('tipo')?.hasError('required')">
             Obbligatorio
