@@ -1,70 +1,66 @@
 <!-- Modal Update -->
-      <div class="modal fade" [id]="'updateModal' + animale.id" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modifica {{ animale.nomeAnimale }}</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-              ></button>
-            </div>
+<div class="modal fade" [id]="'updateModal' + animale.id" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modifica {{ animale.nomeAnimale }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
 
-            <form [formGroup]="updateForm" (ngSubmit)="OnUpdate()">
-              <div class="modal-body">
-                <input type="hidden" formControlName="utente" />
+      <form [formGroup]="updateForm" (ngSubmit)="OnUpdate()">
+        <div class="modal-body">
+          <input type="hidden" formControlName="utente" />
 
-                <div class="mb-3">
-                  <label class="form-label">Nome</label>
-                  <input
-                    type="text"
-                    formControlName="nomeAnimale"
-                    class="form-control"
-                  />
-                </div>
+          <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input
+              type="text"
+              formControlName="nomeAnimale"
+              class="form-control"
+            />
+          </div>
 
-                <div class="mb-3">
-                  <label class="form-label">Tipo</label>
-                  <select formControlName="tipo" class="form-select">
-                    <option
-                      *ngFor="let t of tipi"
-                      [value]="t"
-                      [selected]="t === animale.tipo"
-                    >
-                      {{ t }}
-                    </option>
-                  </select>
-                </div>
+          <div class="mb-3">
+            <label class="form-label">Tipo</label>
+            <select formControlName="tipo" class="form-select">
+              <option
+                *ngFor="let t of tipi"
+                [value]="t"
+                [selected]="t === animale.tipo"
+              >
+                {{ t }}
+              </option>
+            </select>
+          </div>
 
-                <div class="mb-3">
-                  <label class="form-label">Razza</label>
-                  <input
-                    type="text"
-                    formControlName="razza"
-                    class="form-control"
-                  />
-                </div>
+          <div class="mb-3">
+            <label class="form-label">Razza</label>
+            <input type="text" formControlName="razza" class="form-control" />
+          </div>
 
-                <div class="mb-3">
-                  <label class="form-label">Note Mediche</label>
-                  <textarea
-                    formControlName="noteMediche"
-                    class="form-control"
-                  ></textarea>
-                </div>
-              </div>
-
-              <div class="modal-footer">
-                <button
-                  class="btn btn-primary"
-                  type="submit"
-                  [disabled]="!updateForm.valid"
-                >
-                  Salva
-                </button>
-              </div>
-            </form>
+          <div class="mb-3">
+            <label class="form-label">Note Mediche</label>
+            <textarea
+              formControlName="noteMediche"
+              class="form-control"
+            ></textarea>
           </div>
         </div>
-      </div> 
+
+        <div class="modal-footer">
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="!updateForm.valid"
+          >
+            Salva
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

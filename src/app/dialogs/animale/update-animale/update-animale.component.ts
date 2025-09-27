@@ -1,6 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, Inject, inject, OnInit } from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AppuntamentoComponent } from '../../appuntamento/appuntamento.component';
+import { UtenteService } from '../../../services/utente.service';
+import { AnimaliService } from '../../../services/animali.service';
 
 @Component({
   selector: 'app-update-animale',
@@ -9,23 +18,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./update-animale.component.css'],
 })
 export class UpdateAnimaleComponent implements OnInit {
-  updateForm!: FormGroup;
+  private fb = inject(FormBuilder);
+  private dialogRef = inject(MatDialogRef<AppuntamentoComponent>);
+
   msg: string = '';
   id!: number;
-
-  constructor(private routing: Router) {}
+  form!: FormGroup;
+  constructor(
+    private routing: Router,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private animale: AnimaliService
+  ) {}
 
   ngOnInit(): void {
-    this.updateForm = new FormGroup({
-      nomeAnimale: new FormControl('', Validators.required),
-      tipo: new FormControl('', Validators.required),
-      razza: new FormControl(''),
-      noteMediche: new FormControl(''),
-      utente: new FormControl(''),
+    this.form = this.fb.group({
+      nomeAnimale: ['', Validators.required],
+      razza: ['', Validators.required],
+      tipo: ['', Validators.required],
+      noteMediche: ['', [Validators.maxLength(500)]],
     });
+    //serve per valorizzare i campi passati
+    if (this.data && this.data.animale) {
+      this.form.patchValue({
+        nomeAnimale: this.data.animale.nomeAnimale,
+        razza: this.data.animale.razza,
+        tipo: this.data.animale.tipo,
+        noteMediche: this.data.animale.noteMediche,
+      });
+    }
   }
 
-  OnUpdate() {
+  onSubmit() {
+    /*
     const params = this.updateForm.value;
     console.log('Salvato:', params);
     if (this.updateForm.controls['nomeAnimale'].touched) {
@@ -43,5 +67,7 @@ export class UpdateAnimaleComponent implements OnInit {
     if (this.updateForm.controls['utente'].touched) {
       params.utente = this.updateForm.value.utente;
     }
+  
+  */
   }
 }
