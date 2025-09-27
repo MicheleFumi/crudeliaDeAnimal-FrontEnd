@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AnimaliService } from '../../services/animali.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,7 +10,7 @@ import { UpdateAnimaleComponent } from '../../dialogs/animale/update-animale/upd
   selector: 'app-animali',
   standalone: false,
   templateUrl: './animali.component.html',
-  styleUrl: './animali.component.css',
+  styleUrls: ['./animali.component.css'],
 })
 export class AnimaliComponent implements OnInit {
   readonly dialog = inject(MatDialog);
@@ -32,30 +32,26 @@ export class AnimaliComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLogged = this.auth.isAutentificated();
+
     if (this.isLogged) {
-      this.route.paramMap.subscribe((params: ParamMap) => {
-        const idParam = params.get('id');
-        if (idParam !== null) {
-          this.id = +idParam;
-          this.service.findByUserId(this.id).subscribe((resp: any) => {
-            this.animali = resp.dati;
-            console.log(this.animali[0]);
-          });
-        } else {
-          this.routing.navigate(['/signin']).then(() => {
-            window.location.reload();
-          });
-        }
+      this.id = Number(localStorage.getItem('idUtente'));
+      this.service.findByUserId(this.id).subscribe((resp: any) => {
+        this.animali = resp.dati;
+        console.log(this.animali[0]);
+      });
+
+      this.createForm = new FormGroup({
+        nomeAnimale: new FormControl('', Validators.required),
+        tipo: new FormControl('', Validators.required),
+        razza: new FormControl('', Validators.required),
+        noteMediche: new FormControl('', Validators.required),
+        utente: new FormControl(),
+      });
+    } else {
+      this.routing.navigate(['/signin']).then(() => {
+        window.location.reload();
       });
     }
-
-    this.createForm = new FormGroup({
-      nomeAnimale: new FormControl('', Validators.required),
-      tipo: new FormControl('', Validators.required),
-      razza: new FormControl('', Validators.required),
-      noteMediche: new FormControl('', Validators.required),
-      utente: new FormControl(),
-    });
   }
 
   onDelete(animale: any) {
@@ -71,15 +67,15 @@ export class AnimaliComponent implements OnInit {
   }
 
   openUpdateModal(animale: any) {
-    const dialogRef = this.dialog.open(UpdateAnimaleComponent, {
+    this.dialog.open(UpdateAnimaleComponent, {
       data: { animale: animale },
     });
   }
 
   onCreate() {
     const params = this.createForm.value;
-
     params.utente = { id: this.id };
+
     this.service.create(params).subscribe((resp: any) => {
       if (resp.rc) {
         this.routing.navigate(['/animali', this.id]).then(() => {
