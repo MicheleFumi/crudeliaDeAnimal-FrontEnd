@@ -49,15 +49,6 @@ export class AnimaliComponent implements OnInit {
       });
     }
 
-    this.updateForm = new FormGroup({
-      id: new FormControl(),
-      nomeAnimale: new FormControl('', Validators.required),
-      tipo: new FormControl('', Validators.required),
-      razza: new FormControl('', Validators.required),
-      noteMediche: new FormControl('', Validators.required),
-      utente: new FormControl(this.id),
-    });
-
     this.createForm = new FormGroup({
       nomeAnimale: new FormControl('', Validators.required),
       tipo: new FormControl('', Validators.required),
@@ -66,8 +57,6 @@ export class AnimaliComponent implements OnInit {
       utente: new FormControl(),
     });
   }
-
- 
 
   onDelete(animale: any) {
     this.service.delete(animale).subscribe((resp: any) => {
@@ -82,15 +71,9 @@ export class AnimaliComponent implements OnInit {
   }
 
   openUpdateModal(animale: any) {
-     const dialogRef = this.dialog.open(UpdateAnimaleComponent, {
+    const dialogRef = this.dialog.open(UpdateAnimaleComponent, {
       data: { animale: animale },
     });
-
-  }
-
-  annullaUpdate() {
-    this.selectedAnimale = null;
-    this.updateForm.reset();
   }
 
   onCreate() {
