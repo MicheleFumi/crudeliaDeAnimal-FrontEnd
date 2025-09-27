@@ -5,6 +5,7 @@ import { AuthService } from '../../auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateAnimaleComponent } from '../../dialogs/animale/update-animale/update-animale.component';
+import { CreateAnimaleComponent } from '../../dialogs/animale/create-animale/create-animale.component';
 
 @Component({
   selector: 'app-animali',
@@ -37,7 +38,6 @@ export class AnimaliComponent implements OnInit {
       this.id = Number(localStorage.getItem('idUtente'));
       this.service.findByUserId(this.id).subscribe((resp: any) => {
         this.animali = resp.dati;
-        console.log(this.animali[0]);
       });
 
       this.createForm = new FormGroup({
@@ -70,6 +70,10 @@ export class AnimaliComponent implements OnInit {
     this.dialog.open(UpdateAnimaleComponent, {
       data: { animale: animale },
     });
+  }
+
+  openCreateModal() {
+    this.dialog.open(CreateAnimaleComponent);
   }
 
   onCreate() {
