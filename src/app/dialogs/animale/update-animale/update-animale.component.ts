@@ -1,31 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AnimaleService } from '../services/animale.service'; // correggi il path se serve
 
 @Component({
   selector: 'app-update-animale',
+  standalone: false,
   templateUrl: './update-animale.component.html',
-  styleUrls: ['./update-animale.component.css']
+  styleUrls: ['./update-animale.component.css'],
 })
 export class UpdateAnimaleComponent implements OnInit {
   updateForm!: FormGroup;
   msg: string = '';
   id!: number;
 
-  constructor(
-    private service: AnimaleService,
-    private routing: Router
-  ) { }
+  constructor(private routing: Router) {}
 
   ngOnInit(): void {
-    // inizializza il form con FormControls e Validators se vuoi
     this.updateForm = new FormGroup({
       nomeAnimale: new FormControl('', Validators.required),
       tipo: new FormControl('', Validators.required),
       razza: new FormControl(''),
       noteMediche: new FormControl(''),
-      utente: new FormControl('')
+      utente: new FormControl(''),
     });
   }
 
@@ -47,14 +43,5 @@ export class UpdateAnimaleComponent implements OnInit {
     if (this.updateForm.controls['utente'].touched) {
       params.utente = this.updateForm.value.utente;
     }
-    this.service.update(params).subscribe((resp: any) => {
-      if (resp.rc) {
-        this.routing.navigate(['/animali', this.id]).then(() => {
-          window.location.reload();
-        });
-      } else {
-        this.msg = resp.msg;
-      }
-    });
   }
 }
