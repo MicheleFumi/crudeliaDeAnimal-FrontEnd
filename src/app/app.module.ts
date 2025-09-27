@@ -39,7 +39,6 @@ import { WelcomeComponent } from './componenti/welcome/welcome.component';
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
 import { CreateAnimaleComponent } from './dialogs/animale/create-animale/create-animale.component';
 import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-animale.component';
-
 @NgModule({
   declarations: [
     AppComponent,
