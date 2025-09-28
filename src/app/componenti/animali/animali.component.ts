@@ -1,8 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AnimaliService } from '../../services/animali.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateAnimaleComponent } from '../../dialogs/animale/update-animale/update-animale.component';
 import { CreateAnimaleComponent } from '../../dialogs/animale/create-animale/create-animale.component';
@@ -19,13 +18,8 @@ export class AnimaliComponent implements OnInit {
   isLogged: boolean = false;
   animali: any;
   msg: any;
-  tipi: string[] = ['cane', 'gatto', 'uccello', 'pesce', 'roditore', 'rettile'];
-  selectedAnimale: any = null;
-  updateForm!: FormGroup;
-  createForm!: FormGroup;
 
   constructor(
-    private route: ActivatedRoute,
     private service: AnimaliService,
     private auth: AuthService,
     private routing: Router
@@ -40,13 +34,6 @@ export class AnimaliComponent implements OnInit {
         this.animali = resp.dati;
       });
 
-      this.createForm = new FormGroup({
-        nomeAnimale: new FormControl('', Validators.required),
-        tipo: new FormControl('', Validators.required),
-        razza: new FormControl('', Validators.required),
-        noteMediche: new FormControl('', Validators.required),
-        utente: new FormControl(),
-      });
     } else {
       this.routing.navigate(['/signin']).then(() => {
         window.location.reload();
@@ -74,20 +61,5 @@ export class AnimaliComponent implements OnInit {
 
   openCreateModal() {
     this.dialog.open(CreateAnimaleComponent);
-  }
-
-  onCreate() {
-    const params = this.createForm.value;
-    params.utente = { id: this.id };
-
-    this.service.create(params).subscribe((resp: any) => {
-      if (resp.rc) {
-        this.routing.navigate(['/animali', this.id]).then(() => {
-          window.location.reload();
-        });
-      } else {
-        this.msg = resp.msg;
-      }
-    });
   }
 }
