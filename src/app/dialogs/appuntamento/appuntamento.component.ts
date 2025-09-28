@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { AnimaliService } from '../../services/animali.service';
 import { PrenotazioniService } from '../../services/prenotazione.service';
@@ -19,6 +20,7 @@ export class AppuntamentoComponent implements OnInit {
     private auth: AuthService,
     private slot: SlotService,
     private animali: AnimaliService,
+    private router: Router,
     private prenotazione: PrenotazioniService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
@@ -51,14 +53,29 @@ export class AppuntamentoComponent implements OnInit {
         console.log(this.slotDisponibili);
       });
 
-    this.form = this.fb.group({
-      id_animale: new FormControl(),
-      data_visita: new FormControl(),
-      ora_visita: new FormControl(),
-      motivo_visita: new FormControl(),
-      stato_visita: new FormControl(),
-      tipo_pagamento: new FormControl(),
-    });
+    if (this.data.isEdit) {
+      const prenotazione = this.data.prenotazione;
+      // Prepara la data formattata per il form se necessario
+      this.formattedDate = prenotazione.dataVisita;
+
+      this.form = this.fb.group({
+        id_animale: new FormControl(prenotazione.animale?.id), // o il campo corretto per selezionare l'animale
+        data_visita: new FormControl(prenotazione.dataVisita), // data come stringa ISO
+        ora_visita: new FormControl(prenotazione.oraVisita.substring(0, 5)),
+        motivo_visita: new FormControl(prenotazione.motivoVisita),
+        stato_visita: new FormControl(prenotazione.statoVisita),
+        tipo_pagamento: new FormControl(prenotazione.tipoPagamento),
+      });
+    } else {
+      this.form = this.fb.group({
+        id_animale: new FormControl(),
+        data_visita: new FormControl(),
+        ora_visita: new FormControl(),
+        motivo_visita: new FormControl(),
+        stato_visita: new FormControl(),
+        tipo_pagamento: new FormControl(),
+      });
+    }
 
     // this.loadLists();
 
@@ -102,7 +119,7 @@ export class AppuntamentoComponent implements OnInit {
     const raw = this.form.value as any;
 
     const payload = {
-      // id: this.data?.isEdit ? this.data?.record?.id : undefined,
+      id: this.data?.isEdit ? this.data?.prenotazione?.id : undefined,
       idUtente: this.auth.idUtente,
       idAnimale: raw.id_animale,
       idVeterinario: this.data.veterinarioId,
@@ -113,12 +130,14 @@ export class AppuntamentoComponent implements OnInit {
       tipoPagamento: 'CONTANTI',
     };
 
-    //   const req$ = this.data?.isEdit
-    //     ? this.prenSrv.update(payload)
-    //     : this.prenSrv.create(payload);
+    const req$ = this.data?.isEdit
+      ? this.prenotazione.update(payload)
+      : this.prenotazione.create(payload);
 
     this.prenotazione.create(payload).subscribe((resp: any) => {
       console.log(resp.rc + resp.msg);
+      this.router.navigate(['/prenotazioni']);
+      this.dialogRef.close();
     });
   }
 }

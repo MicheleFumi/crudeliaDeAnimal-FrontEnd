@@ -12,9 +12,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {
   BrowserModule,
   provideClientHydration,
@@ -27,6 +28,7 @@ import { AnimaliComponent } from './componenti/animali/animali.component';
 import { HomeComponent } from './componenti/home/home.component';
 import { NavbarComponent } from './componenti/navbar/navbar.component';
 import { NotfoundComponent } from './componenti/notfound/notfound.component';
+import { PrenotazioniComponent } from './componenti/prenotazioni/prenotazioni.component';
 import { ProdottiComponent } from './componenti/prodotti/prodotti.component';
 import { ProdottoComponent } from './componenti/prodotto/prodotto.component';
 import { ProfiloComponent } from './componenti/profilo/profilo.component';
@@ -37,13 +39,9 @@ import { UtentiComponent } from './componenti/utenti/utenti.component';
 import { VeterinariComponent } from './componenti/veterinari/veterinari.component';
 import { VeterinarioComponent } from './componenti/veterinario/veterinario.component';
 import { WelcomeComponent } from './componenti/welcome/welcome.component';
-import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
-<<<<<<< HEAD
-import { PrenotazioniComponent } from './componenti/prenotazioni/prenotazioni.component';
-=======
 import { CreateAnimaleComponent } from './dialogs/animale/create-animale/create-animale.component';
 import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-animale.component';
->>>>>>> 5ab235b80852872aaa62f4e07d0865361e6a3f1e
+import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
 
 @NgModule({
   declarations: [
@@ -63,12 +61,9 @@ import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-
     VeterinariComponent,
     VeterinarioComponent,
     AppuntamentoComponent,
-<<<<<<< HEAD
     PrenotazioniComponent,
-=======
     CreateAnimaleComponent,
     UpdateAnimaleComponent,
->>>>>>> 5ab235b80852872aaa62f4e07d0865361e6a3f1e
   ],
   imports: [
     BrowserModule,
@@ -90,7 +85,8 @@ import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-
     CommonModule,
     BrowserAnimationsModule,
     NgClass,
-    MatRadioModule
+    MatRadioModule,
+    MatButtonToggleModule
   ],
   providers: [
     provideClientHydration(withEventReplay()),

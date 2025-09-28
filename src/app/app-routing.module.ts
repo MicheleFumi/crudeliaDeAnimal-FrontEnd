@@ -5,6 +5,7 @@ import { authGuard } from './auth/auth.guard';
 import { AnimaliComponent } from './componenti/animali/animali.component';
 import { HomeComponent } from './componenti/home/home.component';
 import { NotfoundComponent } from './componenti/notfound/notfound.component';
+import { PrenotazioniComponent } from './componenti/prenotazioni/prenotazioni.component';
 import { ProdottiComponent } from './componenti/prodotti/prodotti.component';
 import { ProdottoComponent } from './componenti/prodotto/prodotto.component';
 import { ProfiloComponent } from './componenti/profilo/profilo.component';
@@ -26,6 +27,11 @@ const routes: Routes = [
   { path: 'veterinari', component: VeterinariComponent },
   { path: 'veterinari/:id', component: VeterinarioComponent },
   {
+    path: 'prenotazioni',
+    component: PrenotazioniComponent,
+    canActivate: [authGuard],
+  },
+  {
     path: 'animali/:id',
     component: AnimaliComponent,
     canActivate: [authGuard],
@@ -39,6 +45,7 @@ const routes: Routes = [
     component: UtentiComponent,
     canActivate: [authAdminGuard],
   },
+
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   {
     path: 'home',

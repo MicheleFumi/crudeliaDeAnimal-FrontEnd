@@ -44,7 +44,11 @@ export class VeterinarioComponent implements OnInit {
     console.log('certificato selected...');
 
     const dialogRef = this.dialog.open(AppuntamentoComponent, {
-      data: { veterinarioId: veterinario.id },
+      width: '800px',
+      maxWidth: '100vw',
+      height: '600px',
+      maxHeight: '100vh',
+      data: { veterinarioId: veterinario.id, isEdit: false },
     });
 
     dialogRef.afterClosed().subscribe((resp: any) => {

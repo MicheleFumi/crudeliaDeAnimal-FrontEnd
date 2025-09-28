@@ -14,6 +14,11 @@ export class PrenotazioniService {
     return this.http.get(this.url + 'listAll');
   }
 
+  findByIdUtente(id: number): Observable<any> {
+    let params = new HttpParams().set('id', id.toString());
+    return this.http.get(this.url + 'findByIdUtente', { params });
+  }
+
   findById(id: number | null): Observable<any> {
     if (id == null) {
       throw new Error('User ID is required');
@@ -31,6 +36,6 @@ export class PrenotazioniService {
   }
 
   delete(body: {}): Observable<any> {
-    return this.http.delete(this.url + 'delete', { body });
+    return this.http.post(this.url + 'delete', body);
   }
 }

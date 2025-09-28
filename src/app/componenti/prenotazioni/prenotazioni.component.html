@@ -1,1 +1,96 @@
-<p>prenotazioni works!</p>
+<div class="container">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center my-3">
+    <h1 class="text-center">Le tue prenotazioni</h1>
+  </div>
+
+  <!-- Lista prenotazioni -->
+  <div *ngIf="prenotazioni && prenotazioni.length > 0; else noPrenotazioni">
+    <div class="row" *ngFor="let prenotazione of prenotazioni">
+      <div class="col-12 mb-3">
+        <mat-card
+          appearance="outlined"
+          class="p-3 d-flex flex-row align-items-center justify-content-between flex-wrap"
+        >
+          <!-- Icona e info animale -->
+          <div class="d-flex align-items-center flex-grow-1">
+            <div class="me-3 text-primary text-center">
+              <i
+                class="fs-3"
+                [ngClass]="{
+                  'fa-dog': prenotazione.animale.tipo === 'cane',
+                  'fa-cat': prenotazione.animale.tipo === 'gatto',
+                  'fa-dove': prenotazione.animale.tipo === 'uccello',
+                  'fa-fish': prenotazione.animale.tipo === 'pesce',
+                  'fa-dragon': prenotazione.animale.tipo === 'rettile',
+                  'fa-paw': prenotazione.animale.tipo === 'roditore'
+                }"
+                aria-hidden="true"
+              ></i>
+              <div class="fs-6 mt-2 text-black">
+                {{ prenotazione.animale.tipo }}
+              </div>
+            </div>
+
+            <div>
+              <h5 class="mb-1">{{ prenotazione.animale.nomeAnimale }}</h5>
+              <p class="mb-1 text-muted">
+                <strong>Razza:</strong> {{ prenotazione.animale.razza }}
+              </p>
+              <p class="mb-0">
+                <strong>Note Mediche:</strong>
+                {{ prenotazione.animale.noteMediche }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Dettagli prenotazione -->
+          <div class="ms-4 flex-grow-1">
+            <p class="mb-1">
+              <strong>Data visita:</strong>
+              {{ prenotazione.dataVisita | date : "dd/MM/yyyy" }}
+            </p>
+            <p class="mb-1">
+              <strong>Ora visita:</strong> {{ prenotazione.oraVisita }}
+            </p>
+            <p class="mb-1">
+              <strong>Motivo:</strong> {{ prenotazione.motivoVisita }}
+            </p>
+            <p class="mb-0">
+              <strong>Pagamento:</strong> {{ prenotazione.tipoPagamento }}
+            </p>
+          </div>
+
+          <!-- Azioni -->
+          <div class="ms-3 text-nowrap d-flex flex-column gap-1">
+            <button
+              class="btn btn-warning btn-sm"
+              (click)="openUpdatePrenotazione(prenotazione)"
+            >
+              Modifica
+            </button>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deletePrenotazione(prenotazione)"
+            >
+              Elimina
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nessuna prenotazione -->
+  <ng-template #noPrenotazioni>
+    <div class="text-center py-5">
+      <p class="fs-5 mb-2">
+        Non hai prenotazioni salvate, vai nei veterinari e prenota la tua
+        visita!
+      </p>
+      <button class="btn btn-primary" routerLink="/veterinari">
+        Prenota ora
+      </button>
+    </div>
+  </ng-template>
+</div>

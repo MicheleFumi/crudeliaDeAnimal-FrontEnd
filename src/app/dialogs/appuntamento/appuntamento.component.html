@@ -1,4 +1,4 @@
-<mat-dialog-content class="container-fluid py-2">
+<mat-dialog-content class="container-fluid" style="overflow: visible">
   <h5 class="mb-3">{{ titolo }}</h5>
 
   <mat-card appearance="outlined" class="p-3">
@@ -37,22 +37,21 @@
 
       <div class="col-12 col-md-6">
         <label class="mb-2">Ora visita</label>
-        <mat-radio-group
+
+        <mat-button-toggle-group
           formControlName="ora_visita"
           required
           aria-label="Seleziona un orario"
-          class="radio-grid"
         >
-          <mat-radio-button
+          <mat-button-toggle
             [disabled]="!a.disponibile"
             *ngFor="let a of slotDisponibili"
             [value]="a.ora"
             class="radio-item"
           >
-            {{ a.ora }}
-          </mat-radio-button>
-        </mat-radio-group>
-
+            {{ a.ora }}</mat-button-toggle
+          >
+        </mat-button-toggle-group>
         <mat-error *ngIf="form.get('ora_visita')?.hasError('required')">
           Obbligatorio
         </mat-error>
