@@ -22,7 +22,7 @@ export class NavbarComponent {
   }
 
   logout() {
-    this.auth.resetAll;
+    this.auth.resetAll();
     this.logged = false;
     this.router.navigate(['/welcome']);
     console.log(this.logged);

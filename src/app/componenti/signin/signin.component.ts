@@ -43,10 +43,13 @@ export class SigninComponent {
         if (resp.logged) {
           this.auth.setAutentificated(resp.id);
           this.msg = '';
-          if ((resp.role = 'ADMIN')) {
+          if (resp.role == 'ADMIN') {
+            console.log(resp.role);
             this.auth.setAdmin();
           }
-          this.router.navigate(['home']);
+          this.router.navigate(['home']).then(() => {
+            window.location.reload();
+          });
         } else {
           this.msg = 'Email o Password invalido';
         }

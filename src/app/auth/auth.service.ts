@@ -15,25 +15,26 @@ export class AuthService {
       const isAdminValue = localStorage.getItem('isAdmin');
       const idUtenteValue = localStorage.getItem('idUtente');
 
-      if (
-        isLoggedValue != null &&
-        isAdminValue != null &&
-        idUtenteValue != null
-      ) {
-        console.log('Token exists in local storage');
-        // Convert string to number properly
+      console.log('Loading from localStorage:', {
+        isLoggedValue,
+        isAdminValue,
+        idUtenteValue,
+      });
+
+      // Check if values exist and are valid
+      if (isLoggedValue && isAdminValue && idUtenteValue) {
         this.idUtente = parseInt(idUtenteValue, 10);
         this.isLogged = isLoggedValue === '1';
         this.isAdmin = isAdminValue === '1';
-        console.log('is admin: ' + this.isAdmin);
+
+        console.log('Parsed values:', {
+          isLogged: this.isLogged,
+          isAdmin: this.isAdmin,
+          idUtente: this.idUtente,
+        });
       } else {
-        // Set default values when no valid data exists
-        localStorage.setItem('isLogged', '0');
-        localStorage.setItem('isAdmin', '0');
-        localStorage.setItem('idUtente', '');
-        this.idUtente = null;
-        this.isLogged = false;
-        this.isAdmin = false;
+        // Initialize with default values
+        this.resetAll();
       }
     }
   }
@@ -66,14 +67,16 @@ export class AuthService {
     this.isAdmin = true;
   }
 
+ 
   resetAll(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('isLogged', '0');
-      localStorage.setItem('isAdmin', '0');
-      localStorage.setItem('idUtente', '');
-    }
-    this.isLogged = false;
-    this.isAdmin = false;
-    this.idUtente = null;
+  if (isPlatformBrowser(this.platformId)) {
+    localStorage.removeItem('isLogged');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('idUtente');
   }
+  this.isLogged = false;
+  this.isAdmin = false;
+  this.idUtente = null;
+  console.log('Force reset completed');
+}
 }

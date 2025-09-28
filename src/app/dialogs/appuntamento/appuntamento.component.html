@@ -7,8 +7,8 @@
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Animale</mat-label>
           <mat-select formControlName="id_animale" required>
-            <mat-option *ngFor="let a of animali" [value]="a.id">
-              {{ a.nome_animale }} ({{ a.tipo }} - {{ a.razza }})
+            <mat-option *ngFor="let a of animaliList" [value]="a.id">
+              {{ a.nomeAnimale }} ({{ a.tipo }} - {{ a.razza }})
             </mat-option>
           </mat-select>
           <mat-error *ngIf="form.get('id_animale')?.hasError('required')"
@@ -25,6 +25,7 @@
             [matDatepicker]="dp"
             formControlName="data_visita"
             required
+            (dateChange)="onDateSelected($event)"
           />
           <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
           <mat-datepicker #dp></mat-datepicker>
@@ -35,19 +36,26 @@
       </div>
 
       <div class="col-12 col-md-6">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Ora visita</mat-label>
-          <input
-            matInput
-            type="time"
-            step="60"
-            formControlName="ora_visita"
-            required
-          />
-          <mat-error *ngIf="form.get('ora_visita')?.hasError('required')"
-            >Obbligatorio</mat-error
+        <label class="mb-2">Ora visita</label>
+        <mat-radio-group
+          formControlName="ora_visita"
+          required
+          aria-label="Seleziona un orario"
+          class="radio-grid"
+        >
+          <mat-radio-button
+            [disabled]="!a.disponibile"
+            *ngFor="let a of slotDisponibili"
+            [value]="a.ora"
+            class="radio-item"
           >
-        </mat-form-field>
+            {{ a.ora }}
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <mat-error *ngIf="form.get('ora_visita')?.hasError('required')">
+          Obbligatorio
+        </mat-error>
       </div>
 
       <div class="col-12">
@@ -85,11 +93,7 @@
       </div>
 
       <div class="col-12 d-flex justify-content-end gap-2">
-        <button
-          class="btn btn-primary"
-          type="submit"
-          [disabled]="form.invalid || submitting"
-        >
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
           {{ "Crea" }}
         </button>
         <button

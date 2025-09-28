@@ -14,6 +14,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatRadioModule} from '@angular/material/radio';
 import {
   BrowserModule,
   provideClientHydration,
@@ -37,6 +38,7 @@ import { VeterinariComponent } from './componenti/veterinari/veterinari.componen
 import { VeterinarioComponent } from './componenti/veterinario/veterinario.component';
 import { WelcomeComponent } from './componenti/welcome/welcome.component';
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
+import { PrenotazioniComponent } from './componenti/prenotazioni/prenotazioni.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.compo
     VeterinariComponent,
     VeterinarioComponent,
     AppuntamentoComponent,
+    PrenotazioniComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +80,7 @@ import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.compo
     CommonModule,
     BrowserAnimationsModule,
     NgClass,
+    MatRadioModule
   ],
   providers: [
     provideClientHydration(withEventReplay()),
