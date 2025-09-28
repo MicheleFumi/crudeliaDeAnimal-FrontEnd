@@ -1,4 +1,4 @@
-import { CommonModule,   NgClass } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,7 +38,12 @@ import { VeterinariComponent } from './componenti/veterinari/veterinari.componen
 import { VeterinarioComponent } from './componenti/veterinario/veterinario.component';
 import { WelcomeComponent } from './componenti/welcome/welcome.component';
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
+<<<<<<< HEAD
 import { PrenotazioniComponent } from './componenti/prenotazioni/prenotazioni.component';
+=======
+import { CreateAnimaleComponent } from './dialogs/animale/create-animale/create-animale.component';
+import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-animale.component';
+>>>>>>> 5ab235b80852872aaa62f4e07d0865361e6a3f1e
 
 @NgModule({
   declarations: [
@@ -58,7 +63,12 @@ import { PrenotazioniComponent } from './componenti/prenotazioni/prenotazioni.co
     VeterinariComponent,
     VeterinarioComponent,
     AppuntamentoComponent,
+<<<<<<< HEAD
     PrenotazioniComponent,
+=======
+    CreateAnimaleComponent,
+    UpdateAnimaleComponent,
+>>>>>>> 5ab235b80852872aaa62f4e07d0865361e6a3f1e
   ],
   imports: [
     BrowserModule,

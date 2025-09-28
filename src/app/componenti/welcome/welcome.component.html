@@ -18,16 +18,13 @@
           tuoi animali, e prenota visite in pochi click.
         </p>
         <div
-          class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start"
+          class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-center"
         >
           <a routerLink="/prodotti" class="btn btn-light btn-lg">
             <i class="bi bi-bag me-2"></i> Vai allo Shop
           </a>
           <a routerLink="/veterinari" class="btn btn-outline-light btn-lg">
             <i class="bi bi-hospital me-2"></i> Trova Ospedali
-          </a>
-          <a routerLink="/appointments" class="btn btn-outline-light btn-lg">
-            <i class="bi bi-calendar-check me-2"></i> Prenota Visita
           </a>
         </div>
         <p class="small mt-3 opacity-75">
@@ -72,13 +69,13 @@
               <h3 class="h5 mb-0">E‑shop Prodotti</h3>
             </div>
             <p class="mb-2">
-              Catalogo per categoria, tipo animale, disponibilità e prezzo con
-              immagini e descrizioni.
+              Sfoglia un catalogo sempre aggiornato, con prodotti divisi per
+              categorie e tipo di animale.
             </p>
             <ul class="small mb-3">
               <li>
-                Tabella: prodotto-animali (nome_prodotto, categoria,
-                tipo_animale, prezzo, quantita_disponibile).
+                Foto, descrizioni e prezzi chiari per un acquisto facile e
+                veloce.
               </li>
             </ul>
             <a routerLink="/prodotti" class="btn btn-outline-primary btn-sm"
@@ -100,8 +97,9 @@
             </p>
             <ul class="small mb-3">
               <li>
-                Tabella: veterinario-ospedali (servizi_offerti,
-                strutture_sanitarie, contatti, luogo).
+                Accedi a una rete di strutture veterinarie affidabili con
+                servizi dettagliati, orari di apertura e contatti sempre
+                verificati.
               </li>
             </ul>
             <a routerLink="/veterinari" class="btn btn-outline-danger btn-sm"
@@ -123,13 +121,11 @@
             </p>
             <ul class="small mb-3">
               <li>
-                Tabella: prenotazione_visita (data/ora, motivo, stato_visita,
-                tipo_pagamento).
+                Organizza facilmente visite veterinarie: scegli la struttura,
+                seleziona data e ora e gestisci lo stato della prenotazione in
+                totale autonomia.
               </li>
             </ul>
-            <a routerLink="/appointments" class="btn btn-outline-success btn-sm"
-              >Prenota ora</a
-            >
           </div>
         </div>
       </div>
@@ -152,7 +148,7 @@
             Crea un account e registra i tuoi animali con note mediche per una
             gestione completa.
           </p>
-          <p class="small text-muted mt-2">Tabelle: utente, animale.</p>
+
           <a routerLink="/auth/register" class="small">Crea account</a>
         </div>
       </div>
@@ -166,9 +162,7 @@
             Aggiungi prodotti al carrello, conferma l’ordine e monitora lo stato
             dell’acquisto.
           </p>
-          <p class="small text-muted mt-2">
-            Tabelle: ordine, ordine_prodotto, prodotto-animali.
-          </p>
+
           <a routerLink="/prodotti" class="small">Vai allo shop</a>
         </div>
       </div>
@@ -182,61 +176,34 @@
             Scegli struttura, data e ora; gestisci stati visita e metodo di
             pagamento (carta, contanti, PayPal).
           </p>
-          <p class="small text-muted mt-2">
-            Tabelle: prenotazione_visita, veterinario-ospedali.
-          </p>
-          <a routerLink="/appointments" class="small">Prenota una visita</a>
         </div>
       </div>
     </div>
   </div>
 </section>
-
 <!-- Trust and highlights -->
 <section class="py-5 bg-light">
   <div class="container">
-    <div class="row g-4 align-items-center">
-      <div class="col-md-6">
-        <h2 class="h4 mb-3">Perché scegliere noi</h2>
-        <ul class="mb-0">
-          <li class="mb-2">
-            <i class="bi bi-shield-check text-success me-2"></i>Dati sicuri e
-            ruoli (ADMIN, MEDICO, USER) per un accesso controllato.
+    <div class="row g-4 justify-content-center text-center">
+      <div class="col-md-8">
+        <h2 class="h4 mb-4">Perché scegliere noi</h2>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-3">
+            <i class="bi bi-shield-check text-success me-2"></i>
+            Dati protetti e gestione sicura degli accessi (Admin, Medico,
+            Utente).
           </li>
-          <li class="mb-2">
-            <i class="bi bi-box-seam text-primary me-2"></i>Catalogo curato per
-            specie, categorie e disponibilità in tempo reale.
+          <li class="mb-3">
+            <i class="bi bi-box-seam text-primary me-2"></i>
+            Catalogo sempre aggiornato con specie, categorie e disponibilità in
+            tempo reale.
           </li>
-          <li class="mb-2">
-            <i class="bi bi-hospital text-danger me-2"></i>Strutture sanitarie
-            verificate con servizi come chirurgia, pronto soccorso e
-            radiografie.
+          <li class="mb-3">
+            <i class="bi bi-hospital text-danger me-2"></i>
+            Strutture veterinarie certificate con servizi avanzati: pronto
+            soccorso, chirurgia, radiografie e molto altro.
           </li>
         </ul>
-      </div>
-      <div class="col-md-6">
-        <div class="p-4 bg-white rounded-3 shadow-sm">
-          <h3 class="h6 text-uppercase text-muted mb-3">Info database</h3>
-          <div class="row">
-            <div class="col-6">
-              <ul class="small mb-0">
-                <li>utente</li>
-                <li>animale</li>
-                <li>prodotto-animali</li>
-              </ul>
-            </div>
-            <div class="col-6">
-              <ul class="small mb-0">
-                <li>ordine / ordine_prodotto</li>
-                <li>prenotazione_visita</li>
-                <li>veterinario-ospedali</li>
-              </ul>
-            </div>
-          </div>
-          <p class="small text-muted mt-3 mb-0">
-            Relazioni impostate con chiavi esterne per integrità referenziale.
-          </p>
-        </div>
       </div>
     </div>
   </div>
@@ -247,8 +214,8 @@
   <div class="container">
     <h2 class="h4 mb-3">Pronto a iniziare?</h2>
     <p class="mb-4">
-      Registrati o accedi per gestire animali, ordini e prenotazioni in un’unica
-      piattaforma.
+      Registrati o accedi e gestisci animali, ordini e prenotazioni in un’unica
+      piattaforma semplice e veloce.
     </p>
     <div class="d-flex gap-3 justify-content-center">
       <a routerLink="/auth/register" class="btn btn-primary">
