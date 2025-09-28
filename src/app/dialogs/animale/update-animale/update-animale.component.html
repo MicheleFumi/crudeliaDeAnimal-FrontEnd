@@ -1,66 +1,73 @@
-<!-- Modal Update -->
-<div class="modal fade" [id]="'updateModal' + animale.id" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modifica {{ animale.nomeAnimale }}</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-        ></button>
+<mat-dialog-content class="container-fluid py-2">
+  <mat-card appearance="outlined" class="p-3">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="row g-3">
+      <!-- Nome Animale -->
+      <div class="col-12 col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <input type="hidden" formControlName="id" required />
+          <mat-label>Nome Animale</mat-label>
+          <input matInput type="text" formControlName="nomeAnimale" required />
+          <mat-error *ngIf="form.get('nomeAnimale')?.hasError('required')">
+            Obbligatorio
+          </mat-error>
+        </mat-form-field>
       </div>
 
-      <form [formGroup]="updateForm" (ngSubmit)="OnUpdate()">
-        <div class="modal-body">
-          <input type="hidden" formControlName="utente" />
+      <!-- Razza -->
+      <div class="col-12 col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Razza</mat-label>
+          <input matInput type="text" formControlName="razza" required />
+          <mat-error *ngIf="form.get('razza')?.hasError('required')">
+            Obbligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-          <div class="mb-3">
-            <label class="form-label">Nome</label>
-            <input
-              type="text"
-              formControlName="nomeAnimale"
-              class="form-control"
-            />
-          </div>
+      <!-- Tipo -->
+      <div class="col-12 col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Tipo</mat-label>
+          <mat-select formControlName="tipo" required>
+            <mat-option *ngFor="let t of tipi" [value]="t">
+              {{ t }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('tipo')?.hasError('required')">
+            Obbligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-          <div class="mb-3">
-            <label class="form-label">Tipo</label>
-            <select formControlName="tipo" class="form-select">
-              <option
-                *ngFor="let t of tipi"
-                [value]="t"
-                [selected]="t === animale.tipo"
-              >
-                {{ t }}
-              </option>
-            </select>
-          </div>
+      <!-- Note Mediche -->
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Note Mediche</mat-label>
+          <textarea
+            matInput
+            rows="3"
+            formControlName="noteMediche"
+            placeholder="Aggiungi eventuali note mediche"
+          ></textarea>
+          <mat-error *ngIf="form.get('noteMediche')?.hasError('maxlength')">
+            Max 500 caratteri
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-          <div class="mb-3">
-            <label class="form-label">Razza</label>
-            <input type="text" formControlName="razza" class="form-control" />
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Note Mediche</label>
-            <textarea
-              formControlName="noteMediche"
-              class="form-control"
-            ></textarea>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button
-            class="btn btn-primary"
-            type="submit"
-            [disabled]="!updateForm.valid"
-          >
-            Salva
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+      <!-- Pulsanti -->
+      <div class="col-12 d-flex justify-content-end gap-2">
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
+          {{ "Salva" }}
+        </button>
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          mat-dialog-close
+        >
+          Chiudi
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</mat-dialog-content>
