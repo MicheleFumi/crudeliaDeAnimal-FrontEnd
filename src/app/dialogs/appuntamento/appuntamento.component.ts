@@ -134,10 +134,11 @@ export class AppuntamentoComponent implements OnInit {
       ? this.prenotazione.update(payload)
       : this.prenotazione.create(payload);
 
-    this.prenotazione.create(payload).subscribe((resp: any) => {
+    req$.subscribe((resp: any) => {
       console.log(resp.rc + resp.msg);
       this.router.navigate(['/prenotazioni']);
       this.dialogRef.close();
+      window.location.reload();
     });
   }
 }
