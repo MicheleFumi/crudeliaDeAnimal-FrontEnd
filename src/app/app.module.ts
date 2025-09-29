@@ -42,6 +42,8 @@ import { UtentiComponent } from './componenti/utenti/utenti.component';
 import { VeterinariComponent } from './componenti/veterinari/veterinari.component';
 import { VeterinarioComponent } from './componenti/veterinario/veterinario.component';
 import { WelcomeComponent } from './componenti/welcome/welcome.component';
+import { CreateAnimaleComponent } from './dialogs/animale/create-animale/create-animale.component';
+import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-animale.component';
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
 import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dialog.component';
 
@@ -67,6 +69,8 @@ import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dial
     CarrelloDialogComponent,
     OrdiniComponent,
     PrenotazioniComponent,
+    UpdateAnimaleComponent,
+    CreateAnimaleComponent,
   ],
   imports: [
     BrowserModule,
