@@ -17,6 +17,8 @@ export class AnimaliComponent implements OnInit {
   msg: any;
   tipi: string[] = ['cane', 'gatto', 'uccello', 'pesce', 'roditore', 'rettile'];
   selectedAnimale: any = null;
+  updateForm!: FormGroup;
+  createForm!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,28 +28,41 @@ export class AnimaliComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      const idParam = params.get('id');
-      if (idParam !== null) {
-        this.id = +idParam;
-        this.service.findByUserId(this.id).subscribe((resp: any) => {
-          this.animali = resp.dati;
-          console.log(this.animali[0]);
-        });
-      }
+    this.isLogged = this.auth.isAutentificated();
+    if (this.isLogged) {
+      this.route.paramMap.subscribe((params: ParamMap) => {
+        const idParam = params.get('id');
+        if (idParam !== null) {
+          this.id = +idParam;
+          this.service.findByUserId(this.id).subscribe((resp: any) => {
+            this.animali = resp.dati;
+            console.log(this.animali[0]);
+          });
+        } else {
+          this.routing.navigate(['/signin']).then(() => {
+            window.location.reload();
+          });
+        }
+      });
+    }
+
+    this.updateForm = new FormGroup({
+      id: new FormControl(),
+      nomeAnimale: new FormControl('', Validators.required),
+      tipo: new FormControl('', Validators.required),
+      razza: new FormControl('', Validators.required),
+      noteMediche: new FormControl('', Validators.required),
+      utente: new FormControl(this.id),
     });
 
-    this.isLogged = this.auth.isAutentificated();
+    this.createForm = new FormGroup({
+      nomeAnimale: new FormControl('', Validators.required),
+      tipo: new FormControl('', Validators.required),
+      razza: new FormControl('', Validators.required),
+      noteMediche: new FormControl('', Validators.required),
+      utente: new FormControl(),
+    });
   }
-
-  updateForm: FormGroup = new FormGroup({
-    id: new FormControl(),
-    nomeAnimale: new FormControl(),
-    razza: new FormControl(),
-    noteMediche: new FormControl(),
-    utente: new FormControl(),
-    tipo: new FormControl(),
-  });
 
   OnUpdate() {
     const params = this.updateForm.value;
@@ -78,7 +93,7 @@ export class AnimaliComponent implements OnInit {
     });
   }
 
-  elimina(animale: any) {
+  onDelete(animale: any) {
     this.service.delete(animale).subscribe((resp: any) => {
       if (resp.rc) {
         this.routing.navigate(['/animali', this.id]).then(() => {
@@ -99,5 +114,19 @@ export class AnimaliComponent implements OnInit {
     this.selectedAnimale = null;
     this.updateForm.reset();
   }
-  aggiungiAnimale() {}
+
+  onCreate() {
+    const params = this.createForm.value;
+
+    params.utente = { id: this.id };
+    this.service.create(params).subscribe((resp: any) => {
+      if (resp.rc) {
+        this.routing.navigate(['/animali', this.id]).then(() => {
+          window.location.reload();
+        });
+      } else {
+        this.msg = resp.msg;
+      }
+    });
+  }
 }

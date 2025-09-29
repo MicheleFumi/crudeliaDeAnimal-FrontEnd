@@ -2,8 +2,12 @@
   <!-- Header -->
   <div class="d-flex justify-content-between align-items-center my-3">
     <h1 class="text-center">I tuoi animali</h1>
-    <button class="btn btn-primary btn-sm" (click)="aggiungiAnimale()">
-      Aggiungi animale
+    <button
+      class="btn btn-primary btn-sm"
+      data-bs-toggle="modal"
+      [attr.data-bs-target]="'#createModal'"
+    >
+      Aggiungi Animale
     </button>
   </div>
 
@@ -15,17 +19,19 @@
         class="p-3 d-flex flex-row align-items-center"
       >
         <!-- Icona -->
-        <div class="me-3 fs-3 text-primary">
+        <div class="me-3 text-primary d-flex flex-column align-items-center">
           <i
-            class="fa-solid"
+            class="fa-solid fs-3"
             [ngClass]="{
               'fa-dog': animale.tipo === 'cane',
               'fa-cat': animale.tipo === 'gatto',
               'fa-dove': animale.tipo === 'uccello',
+              'fa-fish': animale.tipo === 'pesce',
               'fa-dragon': animale.tipo === 'rettile',
               'fa-paw': animale.tipo === 'roditore'
             }"
           ></i>
+          <div class="fs-6 mt-2 text-black">{{ animale.tipo }}</div>
         </div>
 
         <!-- Info -->
@@ -59,7 +65,7 @@
         </div>
       </mat-card>
 
-      <!-- Modal Modifica -->
+      <!-- Modal Update -->
       <div class="modal fade" [id]="'updateModal' + animale.id" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -117,9 +123,6 @@
               </div>
 
               <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">
-                  Chiudi
-                </button>
                 <button
                   class="btn btn-primary"
                   type="submit"
@@ -133,7 +136,7 @@
         </div>
       </div>
 
-      <!-- Modal Elimina -->
+      <!-- Modal Delete -->
       <div class="modal fade" [id]="'deleteModal' + animale.id" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -154,10 +157,82 @@
               <button class="btn btn-secondary" data-bs-dismiss="modal">
                 Annulla
               </button>
-              <button class="btn btn-danger" (click)="elimina(animale)">
+              <button class="btn btn-danger" (click)="onDelete(animale)">
                 Elimina
               </button>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Create -->
+      <div class="modal fade" [id]="'createModal'" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Aggiungi Animale</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+
+            <form [formGroup]="createForm" (ngSubmit)="onCreate()">
+              <div class="modal-body">
+                <input type="hidden" formControlName="utente" />
+
+                <div class="mb-3">
+                  <label class="form-label">Nome</label>
+                  <input
+                    type="text"
+                    formControlName="nomeAnimale"
+                    class="form-control"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Tipo</label>
+                  <select formControlName="tipo" class="form-select" required>
+                    <option *ngFor="let t of tipi" [value]="t">
+                      {{ t }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Razza</label>
+                  <input
+                    type="text"
+                    formControlName="razza"
+                    class="form-control"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Note Mediche</label>
+                  <textarea
+                    formControlName="noteMediche"
+                    class="form-control"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">
+                  Chiudi
+                </button>
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  [disabled]="!createForm.valid"
+                >
+                  Salva
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
