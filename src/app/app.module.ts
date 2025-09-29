@@ -1,21 +1,22 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {
   BrowserModule,
   provideClientHydration,
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AnimaliComponent } from './componenti/animali/animali.component';
+import { CarrelloComponent } from './componenti/carrello/carrello.component';
 import { HomeComponent } from './componenti/home/home.component';
 import { NavbarComponent } from './componenti/navbar/navbar.component';
 import { NotfoundComponent } from './componenti/notfound/notfound.component';
@@ -39,13 +41,10 @@ import { UtentiComponent } from './componenti/utenti/utenti.component';
 import { VeterinariComponent } from './componenti/veterinari/veterinari.component';
 import { VeterinarioComponent } from './componenti/veterinario/veterinario.component';
 import { WelcomeComponent } from './componenti/welcome/welcome.component';
-import { CreateAnimaleComponent } from './dialogs/animale/create-animale/create-animale.component';
 import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-animale.component';
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
-import { CarrelloComponent } from './componenti/carrello/carrello.component';
-import { MatIconModule } from '@angular/material/icon';
 import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dialog.component';
-
+import { CreateAnimaleComponent } from './dialogs/animale/create-animale/create-animale.component';
 
 @NgModule({
   declarations: [
@@ -65,23 +64,24 @@ import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dial
     VeterinariComponent,
     VeterinarioComponent,
     AppuntamentoComponent,
-<<<<<<< HEAD
+    CarrelloComponent,
+    CarrelloDialogComponent,
     PrenotazioniComponent,
-    CreateAnimaleComponent,
     UpdateAnimaleComponent,
-=======
-    CarrelloComponent, 
-    CarrelloDialogComponent
->>>>>>> a46a6db825c61c9fb6b8f748b294982048a58ea3
+    CreateAnimaleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatIconModule,
-    ReactiveFormsModule,
+    CommonModule,
     FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    // Angular Material modules
+    MatIconModule,
     MatCardModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -92,11 +92,7 @@ import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dial
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    CommonModule,
-    BrowserAnimationsModule,
-    NgClass,
     MatRadioModule,
-    MatButtonToggleModule,
   ],
   providers: [
     provideClientHydration(withEventReplay()),
