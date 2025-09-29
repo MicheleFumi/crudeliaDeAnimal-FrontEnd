@@ -30,6 +30,7 @@ import { CarrelloComponent } from './componenti/carrello/carrello.component';
 import { HomeComponent } from './componenti/home/home.component';
 import { NavbarComponent } from './componenti/navbar/navbar.component';
 import { NotfoundComponent } from './componenti/notfound/notfound.component';
+import { OrdiniComponent } from './componenti/ordini/ordini.component';
 import { PrenotazioniComponent } from './componenti/prenotazioni/prenotazioni.component';
 import { ProdottiComponent } from './componenti/prodotti/prodotti.component';
 import { ProdottoComponent } from './componenti/prodotto/prodotto.component';
@@ -41,15 +42,8 @@ import { UtentiComponent } from './componenti/utenti/utenti.component';
 import { VeterinariComponent } from './componenti/veterinari/veterinari.component';
 import { VeterinarioComponent } from './componenti/veterinario/veterinario.component';
 import { WelcomeComponent } from './componenti/welcome/welcome.component';
-import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-animale.component';
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
 import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dialog.component';
-<<<<<<< HEAD
-import { CreateAnimaleComponent } from './dialogs/animale/create-animale/create-animale.component';
-=======
-import { OrdiniComponent } from './componenti/ordini/ordini.component';
-
->>>>>>> 4ba649080ce32656e6e9942bdacd2e5f64945885
 
 @NgModule({
   declarations: [
@@ -69,16 +63,10 @@ import { OrdiniComponent } from './componenti/ordini/ordini.component';
     VeterinariComponent,
     VeterinarioComponent,
     AppuntamentoComponent,
-<<<<<<< HEAD
     CarrelloComponent,
     CarrelloDialogComponent,
+    OrdiniComponent,
     PrenotazioniComponent,
-    UpdateAnimaleComponent,
-    CreateAnimaleComponent
-=======
-    CarrelloComponent, 
-    CarrelloDialogComponent, OrdiniComponent
->>>>>>> 4ba649080ce32656e6e9942bdacd2e5f64945885
   ],
   imports: [
     BrowserModule,
