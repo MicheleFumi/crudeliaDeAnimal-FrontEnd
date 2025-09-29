@@ -42,6 +42,10 @@ import { WelcomeComponent } from './componenti/welcome/welcome.component';
 import { CreateAnimaleComponent } from './dialogs/animale/create-animale/create-animale.component';
 import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-animale.component';
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
+import { CarrelloComponent } from './componenti/carrello/carrello.component';
+import { MatIconModule } from '@angular/material/icon';
+import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -61,13 +65,19 @@ import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.compo
     VeterinariComponent,
     VeterinarioComponent,
     AppuntamentoComponent,
+<<<<<<< HEAD
     PrenotazioniComponent,
     CreateAnimaleComponent,
     UpdateAnimaleComponent,
+=======
+    CarrelloComponent, 
+    CarrelloDialogComponent
+>>>>>>> a46a6db825c61c9fb6b8f748b294982048a58ea3
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatIconModule,
     ReactiveFormsModule,
     FormsModule,
     MatCardModule,
