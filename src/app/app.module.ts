@@ -44,7 +44,12 @@ import { WelcomeComponent } from './componenti/welcome/welcome.component';
 import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-animale.component';
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
 import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dialog.component';
+<<<<<<< HEAD
 import { CreateAnimaleComponent } from './dialogs/animale/create-animale/create-animale.component';
+=======
+import { OrdiniComponent } from './componenti/ordini/ordini.component';
+
+>>>>>>> 4ba649080ce32656e6e9942bdacd2e5f64945885
 
 @NgModule({
   declarations: [
@@ -64,11 +69,16 @@ import { CreateAnimaleComponent } from './dialogs/animale/create-animale/create-
     VeterinariComponent,
     VeterinarioComponent,
     AppuntamentoComponent,
+<<<<<<< HEAD
     CarrelloComponent,
     CarrelloDialogComponent,
     PrenotazioniComponent,
     UpdateAnimaleComponent,
     CreateAnimaleComponent
+=======
+    CarrelloComponent, 
+    CarrelloDialogComponent, OrdiniComponent
+>>>>>>> 4ba649080ce32656e6e9942bdacd2e5f64945885
   ],
   imports: [
     BrowserModule,
