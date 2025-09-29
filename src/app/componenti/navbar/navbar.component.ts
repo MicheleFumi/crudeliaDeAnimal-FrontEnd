@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
-import { ProdottiComponent } from '../prodotti/prodotti.component';
+import { carrelloItem, CarrelloService } from '../../services/carrello.service';
+import { CarrelloDialogComponent } from '../../dialogs/carrello-dialog/carrello-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { CarrelloServiceAPI } from '../../services/carrelloAPI.service';
+
 
 @Component({
   selector: 'app-navbar',
@@ -14,16 +18,53 @@ export class NavbarComponent {
   ordine: any; 
   logged: boolean = false;
   isAdmin: boolean = false;
-  constructor(private auth: AuthService, private router: Router) {}
+   itemCount = 0;
+  cartItems: carrelloItem[] = [];
+
+  constructor(private auth: AuthService,
+     private router: Router , 
+     private carrelloService: CarrelloService , 
+    private dialog: MatDialog,
+    private carrelloServiceAPI: CarrelloServiceAPI,
+) {}
 
   ngOnInit(): void {
     this.logged = this.auth.isLogged;
     this.isAdmin = this.auth.isAdmin;
     this.id = this.auth.idUtente;
-    console.log(this.logged);
+     if (this.logged && this.auth.idUtente) {
+      // inizializza carrello
+      this.carrelloServiceAPI.initCarrello(this.auth.idUtente);
+
+      // sottoscrizione al carrello per aggiornare badge
+      this.carrelloServiceAPI.carrello$.subscribe(carrello => {
+        if (carrello?.dati?.prodotto) {
+          this.itemCount = carrello.dati.prodotto
+            .reduce((acc: number, p: any) => acc + p.quantitaRicheste, 0);
+        } else {
+          this.itemCount = 0;
+        }
+      });
+    }
   }
 
-  logout() {
+ 
+
+   // 🛒 Apre il dialog del carrello
+  apriCarrello() {
+    if (!this.auth.idUtente) return;
+
+    this.dialog.open(CarrelloDialogComponent, {
+      width: '600px',
+      data: { idUtente: this.auth.idUtente }
+    });
+
+    // ⚡️ Non serve afterClosed per aggiornare il counter:
+    // il BehaviorSubject lo aggiorna automaticamente.
+  }
+
+
+   logout() {
     this.auth.resetAll();
     this.logged = false;
     this.router.navigate(['/welcome']);

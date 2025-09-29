@@ -59,15 +59,38 @@
         <a routerLink="/utenti" class="btn btn-primary me-2">
           <i class="bi bi-person"></i> Lista Utenti
         </a>
+        <a routerLink="/gestione-prodotti" class="btn btn-primary me-2">
+          <i class="bi bi-box"></i> Gestione Prodotti
+        </a>
+
+
       </div>
+
       <div class="d-flex gap-3 justify-content-center" *ngIf="logged">
+
         <a routerLink="/profilo" class="btn btn-primary me-2">
           <i class="bi bi-person"></i> Profilo
         </a>
+
         <a routerLink="/ordini" class="btn btn-primary me-2">
   📦     I miei ordini
         </a>
-      </div>
+        </div>
+
+      <div class="d-flex gap-3 justify-content-center" *ngIf="logged">
+
+      <button mat-icon-button (click)="apriCarrello()" 
+          style="position: relative; width: 48px; height: 48px; background-color: #0d6efd; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
+    <mat-icon style="font-size: 24px; color: white;">shopping_cart</mat-icon>
+    <span *ngIf="itemCount > 0"
+          class="badge bg-light text-primary"
+          style="font-size: 10px; min-width: 18px; height: 18px; border-radius: 50%; 
+                 position: absolute; top: -4px; right: -4px; display: flex; align-items: center; justify-content: center;">
+      {{ itemCount }}
+    </span>
+    </button>
+    </div>
+
       <div class="d-flex gap-3 justify-content-center" *ngIf="logged">
         <button (click)="logout()" class="btn btn-outline-danger me-2">
           <i class="bi bi-box-arrow-in-right"></i> Logout

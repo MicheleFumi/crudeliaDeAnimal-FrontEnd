@@ -1,0 +1,71 @@
+<div class="container my-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Gestione Prodotti</h2>
+    <button class="btn btn-primary" (click)="creaProdotto()">
+      <i class="bi bi-plus-circle"></i> Crea Prodotto
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="text-center my-5">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <ul *ngIf="prodotti.length > 0; else noProdotti" class="list-group">
+    <li *ngFor="let prodotto of prodotti" class="list-group-item d-flex align-items-center justify-content-between">
+      
+      <!-- Info prodotto con immagine -->
+      <div class="d-flex align-items-center">
+        <img [src]="prodotto?.immagineUrl || 'assets/default-product.png'" 
+             alt="{{ prodotto.nomeProdotto }}" 
+             class="me-3" 
+             style="width:50px; height:50px; object-fit:cover; border-radius:4px;">
+        <div class="d-flex flex-column">
+          <span><strong>{{ prodotto.nomeProdotto }}</strong></span>
+          <span class="text-muted small">{{ prodotto.descrizione }}</span>
+          <span class="text-muted small">Categoria: {{ prodotto.categoria }}</span>
+          <span class="text-muted small">Tipo Animale: {{ prodotto.tipoAnimale }}</span>
+          <span class="text-muted small">Quantità disponibile: {{ prodotto.quantitaDisponibile }}</span>
+          <span class="text-muted small">Prezzo: € {{ prodotto.prezzo }}</span>
+        </div>
+      </div>
+
+      <!-- Pulsanti -->
+      <div class="d-flex flex-column gap-2">
+        <button class="btn btn-primary btn-sm" (click)="modificaProdotto(prodotto)">Modifica</button>
+        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" [attr.data-bs-target]="'#deleteProductModal' + prodotto.id">Elimina</button>
+      </div>
+
+      <!-- Modal di conferma eliminazione -->
+      <div class="modal fade" [id]="'deleteProductModal' + prodotto.id" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Elimina Prodotto</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              Sei sicuro di voler eliminare
+              <strong>{{ prodotto.nomeProdotto }}</strong>?
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+              <button class="btn btn-danger" 
+                      (click)="eliminaProdotto(prodotto)" 
+                      data-bs-dismiss="modal">
+                Elimina
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fine Modal -->
+
+    </li>
+  </ul>
+
+  <ng-template #noProdotti>
+    <p>Nessun prodotto disponibile.</p>
+  </ng-template>
+</div>

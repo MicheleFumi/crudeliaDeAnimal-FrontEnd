@@ -1,0 +1,87 @@
+<mat-dialog-content class="container-fluid py-2">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="row g-3">
+
+    <!-- Nome Prodotto -->
+    <div class="col-12 col-md-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <input type="hidden" formControlName="id" />
+        <mat-label>Nome Prodotto</mat-label>
+        <input matInput type="text" formControlName="nomeProdotto" required />
+        <mat-error *ngIf="form.get('nomeProdotto')?.hasError('required')">
+          Obbligatorio
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Descrizione -->
+    <div class="col-12">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Descrizione</mat-label>
+        <textarea matInput rows="3" formControlName="descrizione" required></textarea>
+        <mat-error *ngIf="form.get('descrizione')?.hasError('required')">
+          Obbligatorio
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Prezzo -->
+    <div class="col-12 col-md-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Prezzo</mat-label>
+        <input matInput type="number" formControlName="prezzo" required />
+        <mat-error *ngIf="form.get('prezzo')?.hasError('required')">
+          Obbligatorio
+        </mat-error>
+        <mat-error *ngIf="form.get('prezzo')?.hasError('min')">
+          Deve essere maggiore o uguale a 0
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Quantità Disponibile -->
+    <div class="col-12 col-md-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Quantità Disponibile</mat-label>
+        <input matInput type="number" formControlName="quantitaDisponibile" required />
+        <mat-error *ngIf="form.get('quantitaDisponibile')?.hasError('required')">
+          Obbligatorio
+        </mat-error>
+        <mat-error *ngIf="form.get('quantitaDisponibile')?.hasError('min')">
+          Deve essere maggiore o uguale a 0
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Categoria -->
+    <div class="col-12 col-md-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Categoria</mat-label>
+        <input matInput type="text" formControlName="categoria" required />
+        <mat-error *ngIf="form.get('categoria')?.hasError('required')">
+          Obbligatorio
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Tipo Animale -->
+    <div class="col-12 col-md-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Tipo Animale</mat-label>
+        <input matInput type="text" formControlName="tipoAnimale" required />
+        <mat-error *ngIf="form.get('tipoAnimale')?.hasError('required')">
+          Obbligatorio
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Pulsanti -->
+    <div class="col-12 d-flex justify-content-end gap-2">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        Salva
+      </button>
+      <button mat-button type="button" mat-dialog-close>
+        Chiudi
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

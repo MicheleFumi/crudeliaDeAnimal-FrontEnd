@@ -19,6 +19,7 @@ import { WelcomeComponent } from './componenti/welcome/welcome.component';
 import { CarrelloComponent } from './componenti/carrello/carrello.component';
 import { OrdiniComponent } from './componenti/ordini/ordini.component';
 import { OrdineDetailComponent } from './componenti/ordine-detail/ordine-detail.component';
+import { GestioneProdottiComponent } from './componenti/gestione-prodotti/gestione-prodotti.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -51,6 +52,11 @@ const routes: Routes = [
     component: UtentiComponent,
     canActivate: [authAdminGuard],
   },
+   {
+    path: 'gestione-prodotti',
+    component: GestioneProdottiComponent,
+    canActivate: [authAdminGuard],
+  },
 
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   {
@@ -58,6 +64,8 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [authGuard],
   },
+
+
   { path: '**', component: NotfoundComponent },
 ];
 

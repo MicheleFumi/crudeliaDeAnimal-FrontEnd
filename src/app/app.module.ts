@@ -47,6 +47,9 @@ import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
 import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dialog.component';
 import { OrdineDetailComponent } from './componenti/ordine-detail/ordine-detail.component';
+import { GestioneProdottiComponent } from './componenti/gestione-prodotti/gestione-prodotti.component';
+import { CreateProdottoComponent } from './dialogs/prodotto/create-prodotto/create-prodotto.component';
+import { UpdateProdottoComponent } from './dialogs/prodotto/update-prodotto/update-prodotto.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +76,7 @@ import { OrdineDetailComponent } from './componenti/ordine-detail/ordine-detail.
     UpdateAnimaleComponent,
     CreateAnimaleComponent,
     OrdineDetailComponent,
+    GestioneProdottiComponent
   ],
   imports: [
     BrowserModule,

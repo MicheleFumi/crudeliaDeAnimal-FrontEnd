@@ -15,4 +15,20 @@ export class ProdottiService {
     let param = new HttpParams().set('id', id);
     return this.http.get(this.url + 'findById', { params: param });
   }
+
+  createProdotto(prodotto: any, userId: number) {
+  // aggiungi userId al body se necessario
+  const body = { ...prodotto, userId };
+  return this.http.post(this.url + 'create', body);
+}
+
+deleteProdotto(prodotto: any, userId: number) {
+  const body = { ...prodotto, userId }; 
+  return this.http.post(this.url + 'delete', body);
+}
+
+ updateProdotto(prodotto: any, userId: number) {
+  const body = { ...prodotto, userId }; 
+  return this.http.post(this.url + 'update', body);
+}
 }

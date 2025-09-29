@@ -100,16 +100,16 @@ export class ProdottoComponent implements OnInit {
     });
   }
 
-  // 🛒 Apre il dialog del carrello
-  apriCarrello() {
-    if (!this.auth.idUtente) return;
+  // // 🛒 Apre il dialog del carrello
+  // apriCarrello() {
+  //   if (!this.auth.idUtente) return;
 
-    this.dialog.open(CarrelloDialogComponent, {
-      width: '600px',
-      data: { idUtente: this.auth.idUtente }
-    });
+  //   this.dialog.open(CarrelloDialogComponent, {
+  //     width: '600px',
+  //     data: { idUtente: this.auth.idUtente }
+  //   });
 
-    // ⚡️ Non serve afterClosed per aggiornare il counter:
-    // il BehaviorSubject lo aggiorna automaticamente.
-  }
+  //   // ⚡️ Non serve afterClosed per aggiornare il counter:
+  //   // il BehaviorSubject lo aggiorna automaticamente.
+  // }
 }
