@@ -1,0 +1,9 @@
+.product-img {
+  transition: transform 0.3s ease; /* animazione morbida */
+}
+
+.product-img:hover {
+  transform: scale(2); /* ingrandisce 2 volte al passaggio del mouse */
+  z-index: 100;         /* porta l’immagine sopra gli altri elementi */
+  position: relative;
+}

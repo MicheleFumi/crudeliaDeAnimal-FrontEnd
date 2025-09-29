@@ -46,6 +46,7 @@ import { CreateAnimaleComponent } from './dialogs/animale/create-animale/create-
 import { UpdateAnimaleComponent } from './dialogs/animale/update-animale/update-animale.component';
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
 import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dialog.component';
+import { OrdineDetailComponent } from './componenti/ordine-detail/ordine-detail.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dial
     PrenotazioniComponent,
     UpdateAnimaleComponent,
     CreateAnimaleComponent,
+    OrdineDetailComponent,
   ],
   imports: [
     BrowserModule,

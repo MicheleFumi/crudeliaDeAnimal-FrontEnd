@@ -1,0 +1,38 @@
+<div class="container mt-4" *ngIf="ordine; else noOrdine">
+  <h2>Ordine #{{ ordine?.id }}</h2>
+  <p>Totale: {{ ordine?.totaleOrdine | currency:'EUR' }}</p>
+  <p>Data: {{ ordine?.dataOrdine | date:'short' }}</p>
+  <p>Stato: {{ ordine?.statoOrdine }}</p>
+
+  <h4 class="mt-3">Prodotto:</h4>
+  <ul *ngIf="ordine?.dettagliOrdine?.length > 0; else noProdotti" class="list-group">
+    <li *ngFor="let p of ordine.dettagliOrdine" class="list-group-item d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <!-- Immagine del prodotto -->
+        <img [src]="p?.prodotto?.immagineUrl || 'assets/default-product.png'" 
+             alt="{{ p?.prodotto?.nomeProdotto }}" 
+             class="me-3" 
+             style="width:40px; height:40px; object-fit:cover; border-radius:4px;">
+        
+        <!-- Nome prodotto -->
+        <div class="d-flex flex-column">
+          <span><strong>{{ p?.prodotto?.nomeProdotto }}</strong></span>
+          <span class="text-muted small">Quantità richiesta : {{ p?.quantita }}</span>
+        </div>
+      </div>
+
+      <!-- Prezzo unitario -->
+      <div>
+        {{ p?.prodotto?.prezzo | currency:'EUR' }}
+      </div>
+    </li>
+  </ul>
+
+  <ng-template #noProdotti>
+    <p>Nessun prodotto in questo ordine.</p>
+  </ng-template>
+</div>
+
+<ng-template #noOrdine>
+  <p>Ordine non disponibile o non trovato.</p>
+</ng-template>

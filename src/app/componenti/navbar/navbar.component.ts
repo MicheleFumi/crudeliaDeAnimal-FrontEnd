@@ -11,6 +11,7 @@ import { ProdottiComponent } from '../prodotti/prodotti.component';
 })
 export class NavbarComponent {
   id!: any;
+  ordine: any; 
   logged: boolean = false;
   isAdmin: boolean = false;
   constructor(private auth: AuthService, private router: Router) {}

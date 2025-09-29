@@ -17,6 +17,8 @@ import { VeterinariComponent } from './componenti/veterinari/veterinari.componen
 import { VeterinarioComponent } from './componenti/veterinario/veterinario.component';
 import { WelcomeComponent } from './componenti/welcome/welcome.component';
 import { CarrelloComponent } from './componenti/carrello/carrello.component';
+import { OrdiniComponent } from './componenti/ordini/ordini.component';
+import { OrdineDetailComponent } from './componenti/ordine-detail/ordine-detail.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -25,7 +27,9 @@ const routes: Routes = [
   { path: 'prodotti', component: ProdottiComponent },
   { path: 'utenti/utente/:id', component: UtenteComponent },
   { path: 'prodotti/:id', component: ProdottoComponent },
-  {path:'carrello/:id' , component: CarrelloComponent},
+   {path:'carrello/:id' , component: CarrelloComponent},
+   { path: 'ordini', component: OrdiniComponent },
+  { path: 'ordine/:id', component: OrdineDetailComponent },
   { path: 'veterinari', component: VeterinariComponent },
   { path: 'veterinari/:id', component: VeterinarioComponent },
   {
