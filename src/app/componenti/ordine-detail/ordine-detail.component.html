@@ -4,7 +4,7 @@
   <p>Data: {{ ordine?.dataOrdine | date:'short' }}</p>
   <p>Stato: {{ ordine?.statoOrdine }}</p>
 
-  <h4 class="mt-3">Prodotto:</h4>
+  <h4 class="mt-3">Prodotti:</h4>
   <ul *ngIf="ordine?.dettagliOrdine?.length > 0; else noProdotti" class="list-group">
     <li *ngFor="let p of ordine.dettagliOrdine" class="list-group-item d-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center">
