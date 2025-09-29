@@ -1,1 +1,46 @@
-<p>carrello-dialog works!</p>
+<mat-dialog-content class="container-fluid py-2">
+  <h5 class="mb-3">🛒 Il tuo Carrello</h5>
+
+  <div *ngIf="prodotti.length === 0" class="alert alert-info text-center">
+    Il carrello è vuoto.
+  </div>
+
+  <div *ngFor="let item of prodotti" class="card mb-2 p-2">
+    <div class="d-flex align-items-center justify-content-between">
+      <!-- Nome prodotto -->
+      <div class="flex-grow-1">
+        <div class="fw-bold">{{item.nomeProdotto}}</div>
+        <div class="text-muted">{{ item.prezzo | currency:'EUR':'symbol' }} ciascuno</div>
+      </div>
+
+      <!-- Quantità con pulsanti -->
+      <div class="d-flex align-items-center">
+        <button mat-mini-button color="primary" (click)="modificaQuantita(item, -1)" [disabled]="item.quantitaRicheste <= 1">-</button>
+        <input type="number" [value]="item.quantitaRicheste" readonly style="width: 40px; text-align: center; margin: 0 5px;">
+        <button mat-mini-button color="primary" (click)="modificaQuantita(item, 1)">+</button>
+      </div>
+
+      <!-- Totale parziale -->
+      <div class="fw-bold ms-3">{{ (item.prezzo * item.quantitaRicheste) | currency:'EUR':'symbol' }}</div>
+
+      <!-- Pulsante elimina -->
+      <button mat-icon-button color="warn" (click)="eliminaProdotto(item)" matTooltip="Rimuovi prodotto">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Totale generale -->
+  <div class="mt-3 text-end fw-bold fs-5">
+    Totale: {{ calcolaTotale() | currency:'EUR':'symbol' }}
+  </div>
+
+  <div class="mt-3 text-end">
+    <button mat-button mat-dialog-close>Chiudi</button>
+    <button mat-raised-button color="primary" 
+     (click)="confermaOrdine()" 
+    [disabled]="prodotti.length === 0">
+      Conferma Ordine
+    </button>
+  </div>
+</mat-dialog-content>

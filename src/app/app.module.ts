@@ -38,6 +38,9 @@ import { VeterinarioComponent } from './componenti/veterinario/veterinario.compo
 import { WelcomeComponent } from './componenti/welcome/welcome.component';
 import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.component';
 import { CarrelloComponent } from './componenti/carrello/carrello.component';
+import { MatIconModule } from '@angular/material/icon';
+import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -58,10 +61,12 @@ import { CarrelloComponent } from './componenti/carrello/carrello.component';
     VeterinarioComponent,
     AppuntamentoComponent,
     CarrelloComponent, 
+    CarrelloDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatIconModule,
     ReactiveFormsModule,
     FormsModule,
     MatCardModule,

@@ -16,7 +16,9 @@
     <div class="col-md-6">
       <mat-card class="product-detail-card p-4">
         <h2 class="mb-3">{{ prodotto?.nomeProdotto }}</h2>
-        <p class="product-price h4 text-success">€ {{ prodotto?.prezzo }}</p>
+        <p class="product-price h4 text-success">
+          {{ prodotto?.prezzo | currency:'EUR':'symbol' }}
+        </p>
 
         <p class="product-desc mt-3">{{ prodotto?.descrizione }}</p>
 
@@ -28,29 +30,47 @@
         <p>
           Disponibili: <strong>{{ prodotto?.quantitaDisponibile }}</strong>
         </p>
-        
-       
+
+        <!-- Quantità -->
         <div class="qty-box mt-3">
           <div class="d-flex align-items-center gap-2">
-
             <input matInput type="number"
-                  [(ngModel)]="quantita"
-                  min="1"
-                  class="qty-input" />
+                   [(ngModel)]="quantita"
+                   [min]="1"
+                   [max]="prodotto?.quantitaDisponibile"
+                   class="qty-input" />
           </div>
         </div>
-        <mat-card-actions class="mt-4">
-          <button *ngIf="isLogged" mat-raised-button color="primary" (click)="aggiungiAlCarrello()">
+
+        <!-- Azioni -->
+        <mat-card-actions class="mt-4 d-flex align-items-center gap-2">
+          <button *ngIf="isLogged"
+                  mat-raised-button
+                  color="primary"
+                  (click)="aggiungiAlCarrello()"
+                  [disabled]="!quantita || quantita < 1">
             Aggiungi al carrello
           </button>
 
-          <a
-            href="/auth/signin"
-            *ngIf="!isLogged"
-            class="btn btn-primary"
-            color="primary"
-          >
-            Accedi o registrati per aquistare l'articolo
+    <button *ngIf="isLogged"
+        mat-fab
+        color="accent"
+        (click)="apriCarrello()"
+        class="position-fixed"
+        style="top: 70px; right: 20px; z-index: 2000; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center;">
+          <mat-icon style="font-size: 28px;">shopping_cart</mat-icon>
+          <span class="badge bg-warning text-dark position-absolute"
+                style="font-size: 10px; min-width: 16px; height: 16px; border-radius: 50%; top: 4px; right: 4px; display: flex; align-items: center; justify-content: center;"
+                *ngIf="itemCount > 0">
+            {{ itemCount }}
+          </span>
+        </button>
+        
+
+          <a href="/auth/signin"
+             *ngIf="!isLogged"
+             class="btn btn-primary">
+            Accedi o registrati per acquistare l'articolo
           </a>
         </mat-card-actions>
       </mat-card>
