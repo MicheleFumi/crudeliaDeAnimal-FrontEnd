@@ -40,6 +40,7 @@ import { AppuntamentoComponent } from './dialogs/appuntamento/appuntamento.compo
 import { CarrelloComponent } from './componenti/carrello/carrello.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dialog.component';
+import { OrdiniComponent } from './componenti/ordini/ordini.component';
 
 
 @NgModule({
@@ -61,7 +62,7 @@ import { CarrelloDialogComponent } from './dialogs/carrello-dialog/carrello-dial
     VeterinarioComponent,
     AppuntamentoComponent,
     CarrelloComponent, 
-    CarrelloDialogComponent
+    CarrelloDialogComponent, OrdiniComponent
   ],
   imports: [
     BrowserModule,
