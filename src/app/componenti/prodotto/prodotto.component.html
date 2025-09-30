@@ -2,13 +2,16 @@
   <div class="row">
     <!-- Immagine -->
     <div class="col-md-6 d-flex">
-      <mat-card class="product-detail-card w-100" style="display:flex; align-items:center; justify-content:center;">
+      <mat-card
+        class="product-detail-card w-100"
+        style="display: flex; align-items: center; justify-content: center"
+      >
         <img
           mat-card-image
           [src]="prodotto?.immagineUrl"
           alt="{{ prodotto?.nomeProdotto }}"
           class="img-fluid"
-          style="max-height:500px; width:auto; object-fit:contain;"
+          style="max-height: 500px; width: auto; object-fit: contain"
         />
       </mat-card>
     </div>
@@ -18,7 +21,7 @@
       <mat-card class="product-detail-card p-4 w-100">
         <h2 class="mb-3">{{ prodotto?.nomeProdotto }}</h2>
         <p class="product-price h4 text-success">
-          {{ prodotto?.prezzo | currency:'EUR':'symbol' }}
+          {{ prodotto?.prezzo.toFixed(2) | currency : "EUR" : "symbol" }}
         </p>
 
         <p class="product-desc mt-3">{{ prodotto?.descrizione }}</p>
@@ -35,21 +38,25 @@
         <!-- Quantità -->
         <div class="qty-box mt-3">
           <div class="d-flex align-items-center gap-2">
-            <input matInput type="number"
-                   [(ngModel)]="quantita"
-                   [min]="1"
-                   [max]="prodotto?.quantitaDisponibile"
-                   class="qty-input" />
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="quantita"
+              [min]="1"
+              [max]="prodotto?.quantitaDisponibile"
+              class="qty-input"
+            />
           </div>
         </div>
 
-        
         <mat-card-actions class="mt-4 d-flex align-items-center gap-2">
-          <button *ngIf="isLogged"
-                  mat-raised-button
-                  color="primary"
-                  (click)="aggiungiAlCarrello()"
-                  [disabled]="!quantita || quantita < 1">
+          <button
+            *ngIf="isLogged"
+            mat-raised-button
+            color="primary"
+            (click)="aggiungiAlCarrello()"
+            [disabled]="!quantita || quantita < 1"
+          >
             Aggiungi al carrello
           </button>
 
@@ -67,9 +74,7 @@
             </span>
           </button> -->
 
-          <a href="/auth/signin"
-             *ngIf="!isLogged"
-             class="btn btn-primary">
+          <a href="/auth/signin" *ngIf="!isLogged" class="btn btn-primary">
             Accedi o registrati per acquistare l'articolo
           </a>
         </mat-card-actions>
