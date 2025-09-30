@@ -1,5 +1,152 @@
-<header></header>
+<header>
+  <!-- Jumbotron -->
+  <div class="container-fluid bg-light py-5 text-center rounded-3 shadow-sm">
+    <h1 class="display-4 fw-bold text-primary">CrudeliadeAnimal</h1>
+    <p class="lead text-muted">
+      Prodotti e visite veterinarie, tutto in un unico posto 💙 🐾
+    </p>
+    <a [routerLink]="'/prodotti/'" class="btn btn-primary btn-lg px-4 me-2">
+      Scopri Prodotti
+    </a>
+    <a
+      [routerLink]="'/veterinari/'"
+      class="btn btn-outline-primary btn-lg px-4"
+    >
+      Prenota Visita
+    </a>
+  </div>
+</header>
 
-<main></main>
+<main>
+  <!-- CANE -->
+  <section>
+    <div class="bg-info py-1 px-3">
+      <h3>prodotti per il tuo cane</h3>
+    </div>
+    <div class="d-flex overflow-auto gap-3 p-3 no-scroll-x">
+      <div
+        class="card"
+        style="min-width: 18rem"
+        *ngFor="let prodotto of prodottiCane"
+      >
+        <div class="card-header" [routerLink]="'/prodotti/' + prodotto?.id">
+          <img
+            class="card-img-top card-img-fixed"
+            style="height: 300px; object-fit: cover"
+            [src]="prodotto?.immagineUrl"
+            alt=""
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ prodotto?.nomeProdotto }}</h5>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GATTO -->
+  <section>
+    <div class="bg-info py-1 px-3">
+      <h3>prodotti per il tuo gatto</h3>
+    </div>
+    <div class="d-flex overflow-auto gap-3 p-3 no-scroll-x">
+      <div
+        class="card"
+        style="min-width: 18rem"
+        *ngFor="let prodotto of prodottiGatto"
+      >
+        <div class="card-header" [routerLink]="'/prodotti/' + prodotto?.id">
+          <img
+            class="card-img-top card-img-fixed"
+            style="height: 300px; object-fit: cover"
+            [src]="prodotto?.immagineUrl"
+            alt=""
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ prodotto?.nomeProdotto }}</h5>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UCCELLO -->
+  <section>
+    <div class="bg-info py-1 px-3">
+      <h3>prodotti per il tuo uccello</h3>
+    </div>
+    <div class="d-flex overflow-auto gap-3 p-3 no-scroll-x">
+      <div
+        class="card"
+        style="min-width: 18rem"
+        *ngFor="let prodotto of prodottiUccello"
+      >
+        <div class="card-header" [routerLink]="'/prodotti/' + prodotto?.id">
+          <img
+            class="card-img-top card-img-fixed"
+            style="height: 300px; object-fit: cover"
+            [src]="prodotto?.immagineUrl"
+            alt=""
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ prodotto?.nomeProdotto }}</h5>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PESCE -->
+  <section>
+    <div class="bg-info py-1 px-3">
+      <h3>prodotti per il tuo pesce</h3>
+    </div>
+    <div class="d-flex overflow-auto gap-3 p-3 no-scroll-x">
+      <div
+        class="card"
+        style="min-width: 18rem"
+        *ngFor="let prodotto of prodottiPesce"
+      >
+        <div class="card-header" [routerLink]="'/prodotti/' + prodotto?.id">
+          <img
+            class="card-img-top card-img-fixed"
+            style="height: 300px; object-fit: cover"
+            [src]="prodotto?.immagineUrl"
+            alt=""
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ prodotto?.nomeProdotto }}</h5>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RETTILE -->
+  <section>
+    <div class="bg-info py-1 px-3">
+      <h3>prodotti per il tuo rettile</h3>
+    </div>
+    <div class="d-flex overflow-auto gap-3 p-3 no-scroll-x">
+      <div
+        class="card"
+        style="min-width: 18rem"
+        *ngFor="let prodotto of prodottiRettile"
+      >
+        <div class="card-header" [routerLink]="'/prodotti/' + prodotto?.id">
+          <img
+            class="card-img-top card-img-fixed"
+            style="height: 300px; object-fit: cover"
+            [src]="prodotto?.immagineUrl"
+            alt=""
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ prodotto?.nomeProdotto }}</h5>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer></footer>

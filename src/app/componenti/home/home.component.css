@@ -1,13 +1,50 @@
-.example-container {
-  width: auto;
-  height: 200px;
-  margin: 10px;
-  border: 1px solid #555;
-  /* The background property is added to clearly distinguish the borders between drawer and main
-     content */
-  background: #eee;
+.no-scroll-x {
+  overflow-x: scroll; /* abilita lo scroll orizzontale */
+  overflow-y: hidden; /* mantiene nascosta quella verticale */
+  scrollbar-width: none; /* Firefox */
 }
-.active-link {
-  font-weight: bold;
-  color: #3f51b5; /* Material primary color */
+
+.no-scroll-x::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+/* Card styling */
+.card {
+  border-radius: 0.75rem; /* angoli arrotondati */
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* leggera ombra */
+  transition: transform 0.2s, box-shadow 0.2s; /* effetto hover */
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Card header padding */
+.card-header {
+  padding: 0; /* rimuove padding per far combaciare immagine e card */
+}
+
+/* Card body */
+.card-body {
+  padding: 1rem;
+}
+
+/* Titolo H3 sezione */
+section > div.bg-info {
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Aggiunge un po’ di padding interno alle sezioni */
+section {
+  margin-bottom: 2rem;
+}
+
+/* Scroll container cards */
+.no-scroll-x {
+  padding-bottom: 1rem; /* evita che le cards tocchino il bordo inferiore */
 }
