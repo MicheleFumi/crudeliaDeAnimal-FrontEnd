@@ -70,27 +70,30 @@
     </div>
   </div>
 
- <!-- 🔹 Lista prodotti -->
+  <!-- 🔹 Lista prodotti -->
   <div class="row">
-    <div *ngFor="let prodotto of filteredProdotti" class="col-md-3 col-sm-6 mb-3">
+    <div
+      *ngFor="let prodotto of filteredProdotti"
+      class="col-md-3 col-sm-6 mb-3"
+    >
       <mat-card
         class="product-card shadow-sm text-center p-2"
         [routerLink]="'/prodotti/' + prodotto?.id"
-        style="max-width: 230px; margin: auto; font-size: 0.9rem;"
+        style="max-width: 230px; margin: auto; font-size: 0.9rem"
       >
         <img
           mat-card-image
           [src]="prodotto?.immagineUrl || 'assets/default-product.png'"
           alt="{{ prodotto.nomeProdotto }}"
           class="img-fluid rounded mb-2"
-          style="max-height: 160px; object-fit: contain;"
+          style="max-height: 160px; object-fit: contain"
         />
         <mat-card-content>
           <h6 class="product-title fw-bold mb-2">
             {{ prodotto?.nomeProdotto }}
           </h6>
           <p class="product-price text-success mb-1">
-            € {{ prodotto?.prezzo }}
+            € {{ prodotto?.prezzo.toFixed(2) }}
           </p>
           <p class="product-desc text-muted small mb-2">
             {{ prodotto?.descrizione }}
@@ -105,12 +108,11 @@
           <button
             mat-raised-button
             color="primary"
-            style="font-size: 0.8rem; padding: 4px 12px;"
+            style="font-size: 0.8rem; padding: 4px 12px"
           >
             🛒 Aggiungi
           </button>
         </mat-card-actions>
-
       </mat-card>
     </div>
   </div>
