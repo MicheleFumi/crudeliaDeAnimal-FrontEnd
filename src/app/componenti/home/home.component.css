@@ -1,11 +1,5 @@
 .no-scroll-x {
   overflow-x: scroll; /* abilita lo scroll orizzontale */
-  overflow-y: hidden; /* mantiene nascosta quella verticale */
-  scrollbar-width: none; /* Firefox */
-}
-
-.no-scroll-x::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
 }
 
 /* Card styling */
