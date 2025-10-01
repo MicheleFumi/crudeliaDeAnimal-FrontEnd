@@ -22,8 +22,10 @@
           <mat-label>Data visita</mat-label>
           <input
             matInput
+            [matDatepickerFilter]="dateFilter"
             [matDatepicker]="dp"
             formControlName="data_visita"
+            [min]="minDate"
             required
             (dateChange)="onDateSelected($event)"
           />

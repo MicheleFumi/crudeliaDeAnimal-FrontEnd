@@ -30,6 +30,7 @@ export class AppuntamentoComponent implements OnInit {
   form!: FormGroup;
   formError = '';
   formattedDate: any;
+  minDate!: Date | null;
 
   today = new Date();
   ymd = this.today.toISOString().slice(0, 10);
@@ -37,6 +38,12 @@ export class AppuntamentoComponent implements OnInit {
   veterinarioId: any;
 
   ngOnInit(): void {
+    const today = new Date();
+    this.minDate = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
     this.titolo = 'Nuova prenotazione';
     if (this.auth.idUtente !== null) {
       this.animali.findByUserId(this.auth.idUtente).subscribe((resp: any) => {
@@ -76,21 +83,28 @@ export class AppuntamentoComponent implements OnInit {
         tipo_pagamento: new FormControl(),
       });
     }
-
-    // this.loadLists();
-
-    // // Filter animals by selected user if a byUser endpoint exists
-    // this.form.get('id_utente')?.valueChanges.subscribe(uid => {
-    //   if (!uid) return;
-    //   this.animaliSrv.listByUser(uid).subscribe({
-    //     next: r => this.animali = r || [],
-    //     error: () => {} // keep previous list if filter fails
-    //   });
-    // });
   }
+  public dateFilter = (d: Date | null): boolean => {
+    // d is the date being checked by the calendar.
+    const day = (d || new Date()).getDay();
+
+    // Check if it's Sunday (Sunday is 0 in JavaScript's getDay())
+    // Return TRUE if the day is NOT Sunday (i.e., keep it enabled)
+    // Return FALSE if the day IS Sunday (i.e., disable it)
+    return day !== 0;
+  };
   onDateSelected(event: any) {
     const selectedDate: Date = event.value;
-    this.formattedDate = selectedDate.toISOString().split('T')[0]; // "2020-05-20"
+
+    const year = selectedDate.getFullYear();
+    const month = selectedDate.getMonth() + 1;
+    const day = selectedDate.getDate();
+
+    const paddedMonth = String(month).padStart(2, '0');
+    const paddedDay = String(day).padStart(2, '0');
+
+    this.formattedDate = `${year}-${paddedMonth}-${paddedDay}`;
+
     console.log('Data selezionata:', this.formattedDate);
 
     this.slot
@@ -102,12 +116,6 @@ export class AppuntamentoComponent implements OnInit {
         console.log(this.slotDisponibili);
       });
   }
-
-  // private loadLists(): void {
-  //   this.utentiSrv.list().subscribe({ next: r => this.utenti = r || [], error: () => {} });
-  //   this.animaliSrv.list().subscribe({ next: r => this.animali = r || [], error: () => {} });
-  //   this.vetSrv.list().subscribe({ next: r => this.veterinari = r || [], error: () => {} });
-  // }
 
   onSubmit(): void {
     if (this.form.invalid) {
@@ -129,6 +137,8 @@ export class AppuntamentoComponent implements OnInit {
       statoVisita: 'IN_LAVORAZIONE',
       tipoPagamento: 'CONTANTI',
     };
+
+    console.log(payload);
 
     const req$ = this.data?.isEdit
       ? this.prenotazione.update(payload)
