@@ -18,6 +18,32 @@
 </header>
 
 <main>
+  <!-- BESTSELLERS -->
+  <section>
+    <div class="bg-info py-1 px-3">
+      <h3>Bestsellers quasi esauriti</h3>
+    </div>
+    <div class="d-flex overflow-auto gap-3 p-3 no-scroll-x">
+      <div
+        class="card"
+        style="min-width: 18rem"
+        *ngFor="let prodotto of bestSellers"
+      >
+        <div class="card-header" [routerLink]="'/prodotti/' + prodotto?.id">
+          <img
+            class="card-img-top card-img-fixed"
+            style="height: 300px; object-fit: cover"
+            [src]="prodotto?.immagineUrl"
+            alt=""
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ prodotto?.nomeProdotto }}</h5>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CANE -->
   <section>
     <div class="bg-info py-1 px-3">

@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   prodottiUccello: any[] = [];
   prodottiPesce: any[] = [];
   prodottiRettile: any[] = [];
+  bestSellers: any[] = [];
   constructor(private service: ProdottiService) {}
   ngOnInit(): void {
     this.service.listProdotti().subscribe((resp) => {
@@ -36,6 +37,9 @@ export class HomeComponent implements OnInit {
       );
       this.prodottiRettile = this.prodotti.filter(
         (p: any) => p.tipoAnimale === 'Rettile'
+      );
+      this.bestSellers = this.prodotti.filter(
+        (p: any) => p.quantitaDisponibile < 30
       );
     });
   }
