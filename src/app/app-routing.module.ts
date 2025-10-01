@@ -28,8 +28,8 @@ const routes: Routes = [
   { path: 'prodotti', component: ProdottiComponent },
   { path: 'utenti/utente/:id', component: UtenteComponent },
   { path: 'prodotti/:id', component: ProdottoComponent },
-   {path:'carrello/:id' , component: CarrelloComponent},
-   { path: 'ordini', component: OrdiniComponent },
+  { path: 'carrello/:id', component: CarrelloComponent },
+  { path: 'ordini', component: OrdiniComponent },
   { path: 'ordine/:id', component: OrdineDetailComponent },
   { path: 'veterinari', component: VeterinariComponent },
   { path: 'veterinari/:id', component: VeterinarioComponent },
@@ -52,7 +52,7 @@ const routes: Routes = [
     component: UtentiComponent,
     canActivate: [authAdminGuard],
   },
-   {
+  {
     path: 'gestione-prodotti',
     component: GestioneProdottiComponent,
     canActivate: [authAdminGuard],
@@ -62,9 +62,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [authGuard],
   },
-
 
   { path: '**', component: NotfoundComponent },
 ];
