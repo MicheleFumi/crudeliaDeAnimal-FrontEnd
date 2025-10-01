@@ -43,39 +43,16 @@
         >
           Modifica Dati
         </button>
-
+        
+         <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#deleteVeterinariaModal"
+        >
+          Elimina Struttura
+        </button>
       </div>
-        <!-- Modal di conferma eliminazione Struttura -->
-          <div class="modal fade" id="deleteVeterinariaModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Elimina Struttura</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                  Sei sicuro di voler eliminare la struttura
-                  <strong>{{ veterinariaInfo?.nome }}</strong>?
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                  <button
-                    class="btn btn-danger"
-                    (click)="onDelete()"
-                    data-bs-dismiss="modal"
-                  >
-                    Elimina
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        <!-- Fine Modal -->
-
-
-
-
     </div>
     <div class="card-footer text-body-secondary">
       ID Struttura: {{ veterinariaInfo?.id }}
@@ -276,6 +253,31 @@
 
           <p *ngIf="msg" class="text-center mt-3 text-danger">{{ msg }}</p>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal di conferma eliminazione Struttura -->
+<div class="modal fade" id="deleteVeterinariaModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Elimina Struttura</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        Sei sicuro di voler eliminare la struttura
+        <strong>{{ veterinariaInfo?.nome }}</strong>?
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+        <button
+          class="btn btn-danger"
+          (click)="onDelete()"
+          data-bs-dismiss="modal"
+        >
+          Elimina
+        </button>
       </div>
     </div>
   </div>

@@ -11,6 +11,8 @@ import { VeterinariService } from '../../services/veterinari.service';
   styleUrl: './veterinari-medico.component.css',
 })
 export class VeterinariMedicoComponent implements OnInit {
+
+ 
   constructor(
     private veterinariService: VeterinariService,
     private auth: AuthService,
