@@ -47,6 +47,10 @@ export class SigninComponent {
             console.log(resp.role);
             this.auth.setAdmin();
           }
+          if (resp.role == 'MEDICO') {
+            console.log(resp.role);
+            this.auth.setMedico();
+          }
           this.router.navigate(['home']).then(() => {
             window.location.reload();
           });

@@ -59,9 +59,7 @@
         <a routerLink="/utenti" class="btn btn-primary">
           <i class="bi bi-person"></i> Lista Utenti
         </a>
-        <a routerLink="/veterinari-medico" class="btn btn-primary">
-          <i class="bi bi-person"></i>I tuoi veterinari
-        </a>
+
         <a routerLink="/gestione-prodotti" class="btn btn-primary me-2">
           <i class="bi bi-box"></i> Gestione Prodotti
         </a>
@@ -71,7 +69,13 @@
         <a routerLink="/profilo" class="btn btn-primary">
           <i class="bi bi-person"></i> Profilo
         </a>
-
+        <a
+          routerLink="/veterinari-medico"
+          *ngIf="isMedico && logged"
+          class="btn btn-primary"
+        >
+          <i class="bi bi-person"></i>I tuoi veterinari
+        </a>
         <a routerLink="/ordini" class="btn btn-primary me-2">
           📦 I miei ordini
         </a>
