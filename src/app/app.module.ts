@@ -50,6 +50,7 @@ import { OrdineDetailComponent } from './componenti/ordine-detail/ordine-detail.
 import { GestioneProdottiComponent } from './componenti/gestione-prodotti/gestione-prodotti.component';
 import { CreateProdottoComponent } from './dialogs/prodotto/create-prodotto/create-prodotto.component';
 import { UpdateProdottoComponent } from './dialogs/prodotto/update-prodotto/update-prodotto.component';
+import { VeterinariMedicoComponent } from './componenti/veterinari-medico/veterinari-medico.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { UpdateProdottoComponent } from './dialogs/prodotto/update-prodotto/upda
     UpdateAnimaleComponent,
     CreateAnimaleComponent,
     OrdineDetailComponent,
-    GestioneProdottiComponent
+    GestioneProdottiComponent,
+    VeterinariMedicoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,251 @@
+<div class="container my-3">
+  <div class="card" *ngIf="veterinariaInfo; else noDataTemplate">
+    <h5 class="card-header text-center">
+      Gestisci la tua Struttura Veterinaria
+    </h5>
+    <div class="card-body">
+      <h5 class="card-title">Struttura: {{ veterinariaInfo?.nome }}</h5>
+      <p class="card-text">Dettagli della struttura:</p>
+
+      <dl class="row">
+        <dt class="col-sm-3">Tipo</dt>
+        <dd class="col-sm-9">{{ veterinariaInfo?.tipostrutture }}</dd>
+
+        <dt class="col-sm-3">Indirizzo</dt>
+        <dd class="col-sm-9">
+          {{ veterinariaInfo?.indirizzo }} ({{ veterinariaInfo?.cap }})
+        </dd>
+
+        <dt class="col-sm-3">Provincia/Regione</dt>
+        <dd class="col-sm-9">
+          {{ veterinariaInfo?.provincia }}, {{ veterinariaInfo?.regione }}
+        </dd>
+
+        <dt class="col-sm-3">Telefono</dt>
+        <dd class="col-sm-9">{{ veterinariaInfo?.telefono }}</dd>
+
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">{{ veterinariaInfo?.email }}</dd>
+
+        <dt class="col-sm-3">Orari</dt>
+        <dd class="col-sm-9">{{ veterinariaInfo?.orariApertura }}</dd>
+
+        <dt class="col-sm-3">Servizi</dt>
+        <dd class="col-sm-9">{{ veterinariaInfo?.serviziVO }}</dd>
+      </dl>
+
+      <div class="text-end">
+        <button
+          type="button"
+          class="btn btn-primary mx-3"
+          data-bs-toggle="modal"
+          data-bs-target="#veterinariaModal"
+        >
+          Modifica Dati
+        </button>
+        <a (click)="onDelete()" class="btn btn-danger">Elimina Struttura</a>
+      </div>
+    </div>
+    <div class="card-footer text-body-secondary">
+      ID Struttura: {{ veterinariaInfo?.id }}
+    </div>
+  </div>
+
+  <ng-template #noDataTemplate>
+    <div *ngIf="isLoading; else emptyDataTemplate" class="card">
+      <div class="card-body text-center">
+        <p>Caricamento dati struttura...</p>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #emptyDataTemplate>
+    <div class="card border-primary">
+      <div class="card-body text-center">
+        <h5 class="card-title text-primary">Nessuna Struttura Associata</h5>
+        <p class="card-text">
+          Non ci sono strutture veterinarie associate a questo account.
+        </p>
+        <button
+          type="button"
+          class="btn btn-success"
+          data-bs-toggle="modal"
+          data-bs-target="#veterinariaModal"
+          (click)="onAdd()"
+        >
+          Aggiungi una Nuova Struttura
+        </button>
+      </div>
+      <div class="card-footer text-body-secondary">
+        I dati saranno visibili qui dopo l'aggiunta.
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<div
+  class="modal fade"
+  id="veterinariaModal"
+  tabindex="-1"
+  aria-labelledby="veterinariaModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="veterinariaModalLabel">
+          {{
+            isEditMode
+              ? "Aggiorna i dati della Struttura"
+              : "Aggiungi una Nuova Struttura"
+          }}
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateVeterinariaForm" (ngSubmit)="onUpdateOrAdd()">
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="InputNomeStruttura" class="form-label"
+                >Nome Struttura</label
+              >
+              <input
+                id="InputNomeStruttura"
+                type="text"
+                class="form-control"
+                formControlName="nome"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label for="InputTipoStrutture" class="form-label"
+                >Tipo Struttura</label
+              >
+              <select
+                id="InputTipoStrutture"
+                class="form-select"
+                formControlName="tipostrutture"
+                required
+              >
+                <option value="" disabled selected>Seleziona un tipo...</option>
+                <option value="CLINICA">CLINICA</option>
+                <option value="OSPEDALE">OSPEDALE</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label for="InputEmail" class="form-label">Email</label>
+              <input
+                id="InputEmail"
+                type="email"
+                class="form-control"
+                formControlName="email"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label for="InputTelefono" class="form-label">Telefono</label>
+              <input
+                id="InputTelefono"
+                type="tel"
+                class="form-control"
+                formControlName="telefono"
+                required
+              />
+            </div>
+
+            <div class="col-12">
+              <label for="InputIndirizzo" class="form-label">Indirizzo</label>
+              <input
+                id="InputIndirizzo"
+                type="text"
+                class="form-control"
+                formControlName="indirizzo"
+                required
+              />
+            </div>
+
+            <div class="col-md-4">
+              <label for="InputProvincia" class="form-label">Provincia</label>
+              <input
+                id="InputProvincia"
+                type="text"
+                class="form-control"
+                formControlName="provincia"
+                required
+              />
+            </div>
+
+            <div class="col-md-4">
+              <label for="InputRegione" class="form-label">Regione</label>
+              <input
+                id="InputRegione"
+                type="text"
+                class="form-control"
+                formControlName="regione"
+                required
+              />
+            </div>
+
+            <div class="col-md-4">
+              <label for="InputCAP" class="form-label">CAP</label>
+              <input
+                id="InputCAP"
+                type="text"
+                class="form-control"
+                formControlName="cap"
+                required
+              />
+            </div>
+
+            <div class="col-12">
+              <label for="InputOrari" class="form-label"
+                >Orari di Apertura</label
+              >
+              <input
+                id="InputOrari"
+                type="text"
+                class="form-control"
+                formControlName="orariApertura"
+                placeholder="Es. Lun-Sab 09:00-19:00"
+                required
+              />
+            </div>
+
+            <div class="col-12">
+              <label for="InputServizi" class="form-label"
+                >Servizi Offerti (separati da virgola)</label
+              >
+              <input
+                id="InputServizi"
+                type="text"
+                class="form-control"
+                formControlName="serviziVO"
+                placeholder="Es. ODONTOIATRIA, RADIOLOGIA"
+                required
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary w-100 mt-4"
+            [disabled]="updateVeterinariaForm.invalid"
+            data-bs-dismiss="modal"
+          >
+            {{ isEditMode ? "Salva Aggiornamenti" : "Aggiungi Struttura" }}
+          </button>
+
+          <p *ngIf="msg" class="text-center mt-3 text-danger">{{ msg }}</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

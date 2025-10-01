@@ -20,6 +20,7 @@ import { CarrelloComponent } from './componenti/carrello/carrello.component';
 import { OrdiniComponent } from './componenti/ordini/ordini.component';
 import { OrdineDetailComponent } from './componenti/ordine-detail/ordine-detail.component';
 import { GestioneProdottiComponent } from './componenti/gestione-prodotti/gestione-prodotti.component';
+import { VeterinariMedicoComponent } from './componenti/veterinari-medico/veterinari-medico.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -36,6 +37,11 @@ const routes: Routes = [
   {
     path: 'prenotazioni',
     component: PrenotazioniComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'veterinari-medico',
+    component: VeterinariMedicoComponent,
     canActivate: [authGuard],
   },
   {
