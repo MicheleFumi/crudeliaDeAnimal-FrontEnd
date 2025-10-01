@@ -221,16 +221,30 @@
 
             <div class="col-12">
               <label for="InputServizi" class="form-label"
-                >Servizi Offerti (separati da virgola)</label
+                >Servizi Offerti</label
               >
-              <input
+              <select
                 id="InputServizi"
-                type="text"
-                class="form-control"
+                class="form-select"
                 formControlName="serviziVO"
-                placeholder="Es. ODONTOIATRIA, RADIOLOGIA"
                 required
-              />
+              >
+                <option value="" disabled selected>
+                  Seleziona un servizio...
+                </option>
+                <option value="VISITE_GENERALI">Visite Generali</option>
+                <option value="VACCINAZIONI">Vaccinazioni</option>
+                <option value="CHIRURGIA">Chirurgia</option>
+                <option value="RADIOGRAFIE">Radiografie</option>
+                <option value="PRONTO_SOCCORSO">Pronto Soccorso</option>
+                <option value="DAY_HOSPITAL">Day Hospital</option>
+                <option value="ANALISI_DEL_SANGUE">Analisi del Sangue</option>
+                <option value="OFTALMOLOGIA">Oftalmologia</option>
+                <option value="ONCOLOGIA">Oncologia</option>
+                <option value="ORTOPEDICA">Ortopedica</option>
+                <option value="ODONTOIATRIA">Odontoiatria</option>
+                <option value="DERMATOLOGIA">Dermatologia</option>
+              </select>
             </div>
           </div>
 
