@@ -21,9 +21,7 @@ export class HomeComponent implements OnInit {
     this.service.listProdotti().subscribe((resp) => {
       this.response = resp;
       this.prodotti = this.response.dati;
-      this.prodottiCane = this.prodotti.filter(
-        (p: any) => p.tipoAnimale === 'Cane'
-      );
+
       this.prodottiCane = this.prodotti.filter(
         (p: any) => p.tipoAnimale === 'Cane'
       );
