@@ -1,11 +1,11 @@
 <div class="container my-3">
   <div class="card" *ngIf="utenteInfo; else loadingTemplate">
-    <h5 class="card-header text-center">Manage your profile</h5>
+    <h5 class="card-header text-center">Gestione Profilo</h5>
     <div class="card-body">
       <h5 class="card-title">
-        User: {{ utenteInfo?.nome }} {{ utenteInfo?.cognome }}
+        Utente: {{ utenteInfo?.nome }} {{ utenteInfo?.cognome }}
       </h5>
-      <p class="card-text">Here are user's details:</p>
+      <p class="card-text">Dettagli Utente:</p>
 
       <dl class="row">
         <dt class="col-sm-3">Codice Fiscale</dt>
@@ -20,7 +20,7 @@
         <dt class="col-sm-3">Indirizzo</dt>
         <dd class="col-sm-9">{{ utenteInfo?.indirizzo }}</dd>
 
-        <dt class="col-sm-3">Role</dt>
+        <dt class="col-sm-3">Ruolo</dt>
         <dd class="col-sm-9">{{ utenteInfo?.role }}</dd>
       </dl>
 
@@ -31,26 +31,32 @@
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >
-          Edit
+          Modifica
         </button>
-        <a (click)="onDelete()" class="btn btn-danger">Delete account</a>
+        <button
+          data-bs-toggle="modal"
+          data-bs-target="#deleteModal"
+          class="btn btn-danger"
+        >
+          Cancella Account
+        </button>
       </div>
     </div>
     <div class="card-footer text-body-secondary">
-      Member since {{ utenteInfo?.dataRegistrazione }}
+      Membro da {{ utenteInfo?.dataRegistrazione }}
     </div>
   </div>
 
   <ng-template #loadingTemplate>
     <div class="card">
       <div class="card-body text-center">
-        <p>Loading user profile...</p>
+        <p>Caricamento in corso...</p>
       </div>
     </div>
   </ng-template>
 </div>
 
-<!-- Modal -->
+<!-- Update Modal -->
 <div
   class="modal fade"
   id="exampleModal"
@@ -174,6 +180,43 @@
             Update
           </button>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modale -->
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Conferma eliminazione</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Chiudi"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Sei sicuro di voler cancellare l'utente
+        <strong>{{ utenteInfo?.nome }} {{ utenteInfo?.cognome }}</strong
+        >? Questa azione non può essere annullata ⚠️
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Annulla
+        </button>
+
+        <a (click)="onDelete()" class="btn btn-danger" data-bs-dismiss="modal">
+          Cancella Account
+        </a>
       </div>
     </div>
   </div>
